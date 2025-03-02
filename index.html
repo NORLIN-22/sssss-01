@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norlin｜Personal blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script>
+        // 检查是否经过loading页面
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!sessionStorage.getItem('loaded')) {
+                window.location.replace('loading.html');
+            }
+        });
+    </script>
+</head>
+<body class="dark-elements">
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
+        <!-- 左侧Logo，点击滚动到顶部 -->
+        <a href="#top" class="nav-logo" onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'});">
+            <img src="favicon.svg" alt="Norlin Logo">
+        </a>
+        
+        <!-- 中间导航链接区域 -->
+        <div class="nav-links">
+            <a href="#" class="nav-item">首页</a>
+            <a href="pages/about.html" class="nav-item">简介</a>
+            <!-- 添加下拉菜单容器 -->
+            <div class="nav-dropdown">
+                <a class="nav-item">项目</a>
+                <div class="dropdown-content">
+                    <a href="pages/works/graphics.html" class="dropdown-item">平面设计</a>
+                    <a href="pages/works/illustration.html" class="dropdown-item">插画绘画</a> 
+                    <a href="pages/works/frontend.html" class="dropdown-item">前端相关</a>
+                </div> 
+            </div>
+            <a href="pages/contact.html" class="nav-item">联系</a>
+        </div>
+        
+        <!-- 右侧作品集链接，在新标签页打开 -->
+        <a href="https://portfolio-843.pages.dev/#intro" 
+           class="portfolio-link nav-item" 
+           target="_blank" 
+           rel="noopener"
+           title="建议打开VPN">
+            旧版作品集
+        </a>
+    </nav>
+    
+    <!-- 英雄区域：网站主视觉部分 -->
+    <section class="hero-section">
+        <!-- 视差滚动效果容器 -->
+        <div class="parallax-wrapper">
+            <!-- 文字叠加层 -->
+            <div class="text-overlay">
+                <main class="static-text text-inside-border">
+                <main class="static-text text-inside-border">
+                    <!-- 第一行文字 -->
+                    <span class="line">
+                        <span class="year-label">LIN XIAO KAI</span>
+                        <span class="text">NORLIN</span>
+                    </span>
+                    <!-- 第二行文字 -->
+                    <span class="line">
+                        <span class="text">PERSONAL BLOG</span>
+                        <span class="year-label">PORTFLIO</span>
+                    </span>
+                    <!-- 第三行文字 -->
+                    <span class="line">
+                        <span class="year-label">2022-2025</span>
+                        <span class="text">DESIGNER</span>
+                    </span>
+                </main>
+            </div>
+            <!-- 把滚动指示器放在这里 -->
+                <img src="assets/svg/home/scroll-down.svg" alt="scroll down">
+                <img src="assets/svg/home/scroll-down.svg" alt="scroll down">
+            </div>
+            <!-- 3D卡片效果区域 -->
+            <div class="fullscreen-card" id="3d-card"></div>
+            <!-- 遮罩层 -->
+            <div class="overlay"></div>
+            
+        </div>
+    </section>
+    
+    <!-- 主要内容区域，使用CSS变量控制起始位置和高度 -->
+    <div class="content-area" style="--content-start: 100vh;">
+        <div class="container">
+            <div class="project-category-section">
+                <!-- 分类标题 -->
+                <object class="category-title fade-in-section" data="assets/svg/home/projects/title.svg" type="image/svg+xml"></object>
+                
+                <!-- 分类项目网格 -->
+                <div class="project-category">
+                    <a href="pages/works/graphics.html" class="category-item fade-in-section fade-delay-1">
+                        <img src="assets/svg/home/projects/graphics-1.svg" alt="平面设计" class="hover-hide">
+                        <img src="assets/svg/home/projects/graphics-2.svg" alt="平面设计" class="hover-show">
+                    </a>
+                    <a href="pages/works/illustration.html" class="category-item fade-in-section fade-delay-2">
+                        <img src="assets/svg/home/projects/illustration-1.svg" alt="插画绘画" class="hover-hide">
+                        <img src="assets/svg/home/projects/illustration-2.svg" alt="插画绘画" class="hover-show">
+                    </a>
+                    <a href="pages/works/frontend.html" class="category-item fade-in-section fade-delay-3">
+                        <img src="assets/svg/home/projects/frontend-1.svg" alt="前端相关" class="hover-hide">
+                        <img src="assets/svg/home/projects/frontend-2.svg" alt="前端相关" class="hover-show">
+                    </a>
+                </div>
+            </div>
+            <!-- 工作经验区域 -->
+            <div class="experience-section">
+                <!-- 工作经验标题 -->
+                <object class="experience-title fade-in-section" data="assets/svg/home/experience/title.svg" type="image/svg+xml"></object>
+                
+                <!-- 工作经验网格 -->
+                <div class="experience-category">
+                    <div class="experience-item fade-in-section fade-delay-1">
+                        <object data="assets/svg/home/experience/exp-6-1.svg" class="hover-hide"></object>
+                        <object data="assets/svg/home/experience/exp-6-2.svg" class="hover-show"></object>
+                    </div>
+                    <div class="experience-item fade-in-section fade-delay-2">
+                        <object data="assets/svg/home/experience/exp-2-1.svg" class="hover-hide"></object>
+                        <object data="assets/svg/home/experience/exp-2-2.svg" class="hover-show"></object>
+                    </div>
+                    <div class="experience-item fade-in-section fade-delay-3">
+                        <object data="assets/svg/home/experience/exp-3-1.svg" class="hover-hide"></object>
+                        <object data="assets/svg/home/experience/exp-3-2.svg" class="hover-show"></object>
+                    </div>
+  
+                </div>
+                <!-- 游戏经验区域开始 -->
+            <div class="game-section">
+                <!-- 标题：游戏经验 -->
+                <object class="game-title fade-in-section" data="assets/svg/home/games/title.svg" type="image/svg+xml"></object>
+                
+                <!-- 游戏分类展示区域 -->
+                <div class="game-category">
+                    <div class="game-item">
+                        <!-- 二次元游戏部分 -->
+                        <div class="game-type-container fade-in-section">
+                            <div class="game-type-icon">
+                                <img src="assets/svg/home/games/anime/category.svg" class="game-category-icon">
+                            </div>
+                            <div class="game-item-content" data-animation-trigger>
+                                <object data="assets/svg/home/games/anime/genshin.svg" type="image/svg+xml"></object>
+                                <object data="assets/svg/home/games/anime/honkai3.svg" type="image/svg+xml"></object>
+                                <object data="assets/svg/home/games/anime/starrail.svg" type="image/svg+xml"></object>
+                                <object data="assets/svg/home/games/anime/zenless.svg" type="image/svg+xml"></object>
+                                <object data="assets/svg/home/games/anime/infinity.svg" type="image/svg+xml"></object>
+                                <object data="assets/svg/home/games/anime/waves.svg" type="image/svg+xml"></object>
+                            </div>
+                        </div>
+                        
+                        <!-- 竞技游戏部分 -->
+                        <div class="game-type-container fade-in-section fade-delay-2">
+                            <div class="game-type-icon">
+                                <img src="assets/svg/home/games/competitive/category.svg" class="game-category-icon">
+                            </div>
+                            <div class="game-item-content">
+                                <object data="assets/svg/home/games/competitive/tft.svg" type="image/svg+xml"></object>
+                                <object data="assets/svg/home/games/competitive/csgo.svg" type="image/svg+xml"></object>
+                                <object data="assets/svg/home/games/competitive/arena.svg" type="image/svg+xml"></object>
+                            </div>
+                        </div>
+
+                        <!-- 沙盒游戏部分 -->
+                        <div class="game-type-container fade-in-section fade-delay-3">
+                            <div class="game-type-icon">
+                                <img src="assets/svg/home/games/sandbox/category.svg" class="game-category-icon">
+                            </div>
+                            <div class="game-item-content">
+                                <object data="assets/svg/home/games/sandbox/terraria.svg" type="image/svg+xml"></object>
+                                <object data="assets/svg/home/games/sandbox/minecraft.svg" type="image/svg+xml"></object>
+                            </div>
+                        </div>
+
+                        <!-- 生存游戏部分 -->
+                        <div class="game-type-container fade-in-section fade-delay-4">
+                            <div class="game-type-icon">
+                                <img src="assets/svg/home/games/survival/category.svg" class="game-category-icon">
+                            </div>
+                            <div class="game-item-content">
+                                <object data="assets/svg/home/games/survival/greenhell.svg" type="image/svg+xml"></object>
+                                <object data="assets/svg/home/games/survival/strandeddeep.svg" type="image/svg+xml"></object>
+                            </div>
+                        </div>
+
+                        <!-- 策略卡牌游戏部分 -->
+                        <div class="game-type-container fade-in-section fade-delay-5">
+                            <div class="game-type-icon">
+                                <img src="assets/svg/home/games/strategy/category.svg" class="game-category-icon">
+                            </div>
+                            <div class="game-item-content">
+                                <object data="assets/svg/home/games/strategy/sgs.svg" type="image/svg+xml"></object>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 移动到container外面 -->
+<div class="footer-banner">
+    <!-- 蓝色顶部只包含过渡图案 -->
+    <div class="footer-banner-top">
+        <div class="footer-pattern"></div>
+    </div>
+    <!-- 白色底部包含所有其他内容 -->
+    <div class="footer-banner-bottom">
+        <div class="footer-content">
+            <!-- Logo和联系方式在同一行 -->
+            <div class="footer-top">
+                <!-- Logo -->
+                <object class="footer-header" data="assets/svg/home/footer/norlin-logo.svg"></object>
+                
+                <!-- 联系方式 -->
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <img src="assets/svg/home/footer/phone.svg" class="contact-icon">
+                        <span>+86 131-4706-3894</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="assets/svg/home/footer/email.svg" class="contact-icon">
+                        <span>2216921192@qq.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="assets/svg/home/footer/wechat.svg" class="contact-icon">
+                        <span>norlin2216</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分隔线 -->
+            <img class="footer-divider" src="assets/svg/home/footer/divider.svg">
+            
+            <!-- 版权信息 -->
+            <object class="footer-copyright" data="assets/svg/home/footer/copyright.svg"></object>
+        </div>
+    </div>
+</div>
+
+<!-- 滚动提示指示器 -->
+<div class="scroll-indicator">
+    <span class="scroll-arrow"></span>
+</div>
+    
+    <!-- 引入主要JavaScript文件 -->
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+/* 动画定义 */
+@keyframes textEntrance {
+    from { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(1.2); 
+        filter: blur(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1); 
+        filter: blur(0); 
+    }
+}
+
+@keyframes slideIn {
+    from { 
+        transform: translateX(-100%); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
+
+@keyframes wave {
+    0%, 100% { 
+        transform: translateY(0); 
+    }
+    50% { 
+        transform: translateY(-10px); 
+    }
+}
+
+/* 添加移动端菜单动画 */
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 动画类 */
+.slide-in {
+    animation: slideIn 1s forwards;
+}
+/* ...其他动画相关样式... */
+
+/* 导航悬浮效果 */
+.nav-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    transition: width 0.3s ease;
+}
+
+/* 删除原有的背景色定义，现在由 dark-elements 和 light-elements 类控制 */
+
+/* 文本动画 */
+.line {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    animation: slideIn 1s forwards;
+    letter-spacing: calc(var(--letter-spacing) * 1em);
+    margin: 0 0 var(--line-spacing) 0;
+    line-height: 1;
+}
+
+.nav-links.active .nav-item {
+    animation: menuFadeIn 0.3s forwards;
+    animation-delay: calc(var(--item-index) * 0.1s);
+}
+
+/* 预加载状态 */
+body.preload * {
+    animation: none !important;
+}

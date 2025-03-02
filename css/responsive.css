@@ -1,0 +1,202 @@
+/* 移动端变量 */
+:root {
+    --mobile-border-margin: 15px;
+    --mobile-text-margin: 200px;
+    --mobile-nav-gap: 30px;
+    --mobile-line-offset: 40px;
+}
+
+/* 平板和小屏幕适配 */
+@media screen and (max-width: 768px) {
+    .text-size {
+        --base-size: 1.5vw;
+    }
+    
+    .nav-menu {
+        gap: 40px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        bottom: calc(var(--mobile-border-margin) + 15px);
+    }
+
+    .footer-text {
+        font-size: 10px;
+    }
+
+    .vertical-line-left { 
+        left: calc(var(--mobile-border-margin) + var(--mobile-line-offset));
+    }
+
+    .vertical-line-right {
+        right: calc(var(--mobile-border-margin) + var(--mobile-line-offset));
+    }
+
+    .static-text {
+        font-size: 12vw;
+    }
+}
+
+/* 平板端断点 (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    :root {
+        --nav-gap: 40px;
+        --nav-height: 70px;
+        --content-width: 90%;
+    }
+
+    .static-text {
+        font-size: 8vw;
+    }
+
+    .nav-links {
+        gap: 40px;
+    }
+
+    .portfolio-link.nav-item {
+        right: 40px;
+    }
+}
+
+/* 手机端断点 (< 768px) */
+@media screen and (max-width: 768px) {
+    :root {
+        --nav-gap: 20px;
+        --nav-height: 60px;
+        --mobile-border-margin: 15px;
+    }
+
+    /* 导航栏适配 */
+    .nav-menu {
+        padding: 0 20px;
+        height: 60px;
+    }
+
+    .nav-logo {
+        width: 35px;
+        left: 20px;
+        top: 12px;
+    }
+
+    /* 移动端菜单按钮 */
+    .menu-toggle {
+        display: block;
+        position: fixed;
+        right: 20px;
+        top: 15px;
+        z-index: 10000;
+    }
+
+    /* 导航链接移动端样式 */
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--secondary-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-links.active {
+        display: flex;
+        transform: translateX(0);
+    }
+
+    .nav-item {
+        font-size: 24px;
+        color: var(--primary-color) !important;
+    }
+
+    /* 作品集链接移动端位置 */
+    .portfolio-link.nav-item {
+        position: relative !important;
+        right: auto;
+        margin-top: 20px;
+    }
+
+    /* 主文本区域适配 */
+    .static-text {
+        font-size: 10vw;
+        width: 90%;
+        top: 50%;
+        text-align: center;
+    }
+
+    .line {
+        margin-bottom: 10px;
+    }
+
+    .line-1 {
+        font-size: 9vw;
+    }
+
+    .line-blog {
+        font-size: 7vw;
+    }
+
+    .line-designer {
+        font-size: 9vw;
+    }
+
+    .year-label {
+        font-size: 3vw;
+    }
+
+    /* 内容区域适配 */
+    .content-area {
+        border-radius: 20px 20px 0 0;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+}
+
+/* 手机端适配 */
+@media screen and (max-width: 480px) {
+    :root {
+        --mobile-border-margin: 10px;
+        --mobile-nav-gap: 20px;
+        --line-spacing: -10px;
+    }
+
+    .nav-menu {
+        top: calc(var(--mobile-border-margin) + 8px);
+    }
+
+    .horizontal-line,
+    .horizontal-line-bottom {
+        left: calc(var(--mobile-border-margin) + 10px);
+        right: calc(var(--mobile-border-margin) + 10px);
+    }
+
+    .static-text {
+        font-size: 8vw;
+    }
+
+    .line-1 {
+        font-size: 8vw;
+    }
+
+    .line-blog {
+        font-size: 6vw;
+    }
+
+    .line-designer {
+        font-size: 8vw;
+    }
+
+    .year-label {
+        font-size: 2.5vw;
+    }
+}

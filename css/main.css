@@ -1,0 +1,1098 @@
+/*================================================
+ * 网站样式表 - Norlin Personal Blog
+ *================================================
+ * 目录:
+ * 1. CSS变量与全局设置
+ * 2. 基础样式
+ * 3. 导航栏样式
+ *    - 导航菜单容器
+ *    - Logo相关
+ *    - 导航链接
+ *    - 作品集链接
+ *    - 颜色切换效果
+ *    - 下拉菜单
+ * 4. 英雄区域样式
+ *    - 主容器
+ *    - 视差效果
+ *    - 背景图片
+ *    - 滚动指示器
+ * 5. 文本样式
+ *    - 布局
+ *    - 排版
+ * 6. 内容区域样式
+ *    - 主要内容区
+ *    - 项目分类
+ *    - 工作经验
+ *    - 游戏经验
+ * 7. 动画与过渡效果
+ * 8. 页脚样式
+ * 9. 响应式布局
+ *================================================
+ * 作者: Norlin
+ * 最后更新: 2023
+ *================================================*/
+
+/*---------------*\
+  1. 变量与全局设置
+\*---------------*/
+:root {
+    /* 主题颜色 - 用于整个网站的颜色方案统一 */
+    --primary-color: #ffffff;      /* 主要文本颜色 (白色) */
+    --secondary-color: #111111;    /* 次要文本颜色 (黑色) */
+    --text-color: rgba(255, 255, 255, 1); /* 文本颜色 (白色) */
+    --shadow-color: rgba(0, 0, 0, 0.5);   /* 阴影颜色 */
+    --bg-color: #f9fafc00;         /* 背景颜色 (透明) */
+    --accent-color: #387ce8;       /* 强调色 (蓝色) - 用于突出显示和交互元素 */
+    
+    /* 布局尺寸 - 控制页面整体布局的关键尺寸 */
+    --spacing-unit: 30px;         /* 基础间距单位 */
+    --content-width: 1200px;      /* 内容区最大宽度 */
+    --nav-height: 90px;           /* 导航栏高度 */
+    --border-radius: 30px;        /* 边框圆角半径 */
+    
+    /* 间距控制 - 特定元素的间距设置 */
+    --nav-gap: 80px;              /* 导航项目之间的间距 */
+    --text-margin: 400px;         /* 文本外边距 */
+    
+    /* 字体设置 - 网站使用的字体族和大小 */
+    --font-primary: 'Noto Sans TC', sans-serif;  /* 主要字体 */
+    --font-display: 'Zen Dots', cursive;        /* 展示用字体 */
+    --font-nav: 'Noto Sans TC', sans-serif;     /* 导航字体 */
+    --font-size-base: 16px;                     /* 基础字体大小 */
+    
+    /* 动画时间 - 过渡效果的持续时间 */
+    --transition-fast: 0.1s;      /* 快速过渡 */ 
+    --transition-normal: 0.3s;    /* 普通过渡 */
+
+    /* 内容区域比例控制 - 用于不同区域的缩放 */
+    --project-section-scale: 1;   /* 项目分类区域缩放比例 */
+    --experience-section-scale: 1; /* 工作经验区域缩放比例 */
+    --game-section-scale: 1;      /* 游戏经验区域缩放比例 */
+}
+
+/*---------------*\
+  2. 基础样式
+\*---------------*/
+body {
+    margin: 0;                   /* 移除默认边距 */
+    overflow-x: hidden;          /* 隐藏水平滚动条 */
+    position: relative;          /* 相对定位，作为绝对定位元素的参考 */
+    font-family: var(--font-primary); /* 设置默认字体 */
+}
+
+/*---------------*\
+  3. 导航栏样式
+\*---------------*/
+/* 导航菜单容器 
+ * 固定在页面顶部的主导航栏
+ */
+.nav-menu {
+    position: fixed;          /* 固定在视窗顶部 */
+    top: 0;                  
+    left: 0;                 
+    right: 0;                
+    height: var(--nav-height); 
+    padding: 0 40px;         
+    display: flex;           
+    justify-content: space-between; /* 子元素两端对齐 */
+    align-items: center;     
+    z-index: 10000;          /* 确保显示在其他元素之上 */
+    transition: 
+        background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: background-color, box-shadow, border-color, opacity; /* 优化性能 */
+    opacity: 0.98;           /* 轻微透明效果 */
+}
+
+/* 导航菜单在白色区域的样式 
+ * 当导航栏进入白色背景区域时应用
+ */
+.nav-menu.in-white-section {
+    background: rgba(255, 255, 255, 0.98); /* 半透明白色背景 */
+    box-shadow: 0 2px 10px rgba(49, 139, 224, 0.336); /* 轻微阴影 */
+    backdrop-filter: blur(10px);    /* 背景模糊效果 */
+    -webkit-backdrop-filter: blur(10px); /* Safari 支持 */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* 轻微边框 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Logo样式
+ * 网站标志及其容器样式
+ */
+.nav-logo {
+    width: 40px;            /* Logo宽度 */
+    height: auto;           /* 自动高度 */
+    position: relative;     
+    left: 180px;            /* 左侧定位 */
+}
+
+.nav-logo img {
+    width: 100%;            /* 填充容器 */
+    height: 100%;           
+    filter: brightness(0) invert(1); /* 将SVG图片转为白色 */
+    transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 导航链接样式
+ * 顶部菜单中的链接项
+ */
+.nav-links {
+    display: flex;          /* 弹性布局 */
+    align-items: center;    
+    justify-content: center; 
+    gap: var(--nav-gap);    /* 链接间距 */
+}
+
+.nav-item {
+    color: var(--primary-color) !important; /* 文字颜色 */
+    font-family: var(--font-nav);          /* 字体 */
+    text-decoration: none;                  /* 移除下划线 */
+    font-size: var(--font-size-base);       /* 字体大小 */
+    position: relative;                     /* 用于下划线效果 */
+    padding: 5px 0;                        
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, color;
+}
+
+.nav-links .nav-item {
+    color: var(--primary-color) !important;
+    font-family: var(--font-nav);
+    text-decoration: none;
+    font-size: var(--font-size-base);
+    position: relative;
+    padding: 5px 0;
+}
+
+/* 作品集特殊样式
+ * 右侧特殊链接，样式不同于其他导航项
+ */
+.portfolio-link.nav-item {
+    color: var(--primary-color) !important;
+    font-family: var(--font-nav);
+    text-decoration: none;
+    font-size: calc(var(--font-size-base) * 1); 
+    right: 180px;           /* 右侧定位 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-link.nav-item:hover {
+    background: rgba(109, 144, 210, 0.8); /* 悬浮背景色 */
+    transform: translateY(-2px);           /* 轻微上移效果 */
+}
+
+.nav-menu.in-white-section .portfolio-link.nav-item {
+    color: var(--secondary-color) !important;
+    border-color: var(--secondary-color);
+}
+
+.nav-menu.in-white-section .portfolio-link.nav-item:hover {
+    background: transparent;  
+    color: var(--accent-color) !important; /* 蓝色高亮 */
+    transform: none;          /* 移除上移效果 */
+}
+
+/* 导航项悬浮下划线效果 */
+.nav-item::after {
+    content: '';            /* 创建伪元素作为下划线 */
+    position: absolute;     
+    bottom: -2px;           /* 位于文本下方 */
+    left: 0;               
+    width: 0;               /* 初始宽度为0 */
+    height: 1px;            /* 下划线高度 */
+    background-color: var(--primary-color); /* 下划线颜色 */
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: width, transform;
+}
+
+.nav-item:hover::after {
+    width: 100%;            /* 悬浮时下划线展开至全宽 */
+}
+
+/* 导航栏颜色切换效果
+ * 在白色区域与暗色区域之间切换时的样式变化
+ */
+.nav-menu.in-white-section .nav-item {
+    color: var(--secondary-color) !important;
+    transition: color 0.1s ease-out;
+}
+
+.nav-menu.in-white-section .nav-logo img {
+    /* 蓝色 #387ce8 的 filter 值 */
+    filter: invert(45%) sepia(92%) saturate(1864%) hue-rotate(202deg) brightness(98%) contrast(93%); 
+    transition: filter 0.1s ease-out;
+}
+
+.nav-menu.in-white-section .nav-item::after {
+    background-color: var(--secondary-color);
+}
+
+.content-area ~ .nav-menu .nav-item,
+.nav-menu.in-white-section .portfolio-link.nav-item {
+    color: var(--secondary-color) !important;
+}
+
+.content-area ~ .nav-menu .nav-item::after,
+.nav-menu.in-white-section .portfolio-link.nav-item::after {
+    background-color: var(--secondary-color);
+}
+
+.content-area ~ .nav-menu .nav-logo img {
+    filter: invert(45%) sepia(92%) saturate(1864%) hue-rotate(202deg) brightness(98%) contrast(93%);
+}
+
+/* 优化导航栏颜色切换过渡效果 */
+.nav-menu * {
+    transition: color 0.1s ease-out, filter 0.1s ease-out;
+    will-change: color, filter;
+}
+
+/* 下拉菜单样式
+ * 用于项目分类的下拉菜单
+ */
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* 下拉菜单内容 - 默认隐藏状态 */
+.dropdown-content {
+    display: none;          /* 初始隐藏 */
+    position: absolute;     
+    top: 100%;              /* 位于触发元素下方 */
+    left: 50%;              
+    transform: translateY(-10px) translateX(-50%); /* 居中并上移 */
+    opacity: 0;
+    visibility: hidden;
+    transition: 
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0.3s cubic-bezier(0.4, 0, 0.2, 0.1);
+    min-width: 120px;       /* 最小宽度 */
+    background: rgba(0, 0, 0, 0.1); /* 半透明背景 */
+    backdrop-filter: blur(8px);     /* 背景模糊效果 */
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* 边框 */
+    box-shadow: 0 2px 10px rgba(86, 162, 232, 0.1); /* 阴影 */
+    border-radius: 8px;     /* 圆角 */
+    padding: 8px 0;         /* 内部间距 */
+    z-index: 1000;          /* 层级确保在导航项上方 */
+    margin-top: 5px;        /* 与导航项的间距 */
+    padding-top: 5px;
+}
+
+/* 添加一个看不见的过渡区域，增大交互区域 */
+.nav-dropdown::after {
+    content: '';
+    position: absolute;
+    height: 10px;    /* 过渡区域高度 */
+    width: 100%;
+    bottom: -10px;
+    left: 0;
+}
+
+/* 显示下拉菜单状态 */
+.nav-dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) translateX(-50%); /* 重置位置 */
+}
+
+/* 下拉菜单项目样式 */
+.dropdown-item {
+    display: block;         /* 块级显示确保每项占据一行 */
+    padding: 8px 20px;      /* 内边距确保点击区域合适 */
+    color: var(--primary-color) !important;
+    font-family: var(--font-nav);
+    text-decoration: none;  
+    font-size: var(--font-size-base);
+    font-weight: 300;       /* 细字体 */
+    transition: 
+        color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;     
+    white-space: nowrap;    /* 防止文本换行 */
+}
+
+/* 下拉菜单项目悬浮效果 */
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px); /* 轻微右移效果 */
+}
+
+/* 白色区域中的下拉菜单样式 */
+.nav-menu.in-white-section .dropdown-content {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.nav-menu.in-white-section .dropdown-item {
+    color: var(--secondary-color) !important;
+    font-weight: 300;
+}
+
+.nav-menu.in-white-section .dropdown-item:hover {
+    background: transparent;
+    color: var(--accent-color) !important; /* 蓝色高亮 */
+}
+
+/*---------------*\
+  4. 英雄区域样式
+\*---------------*/
+/* 主容器
+ * 网站首屏展示区域
+ */
+.hero-section {
+    --scale-factor: 1;     /* 缩放比例变量 */
+    height: 100vh;         /* 全屏高度 */
+    position: relative;     
+    overflow: hidden;       
+    background: var(--secondary-color); /* 背景色 */
+    transform: scale(var(--scale-factor)); 
+    transform-origin: center top;
+}
+
+/* 视差效果包装器 */
+.parallax-wrapper {
+    height: 100%;          
+    width: 100%;           
+    position: relative;    
+}
+
+/* 背景图片卡片 - 3D效果的基础 */
+.fullscreen-card {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    transform-style: preserve-3d; /* 启用3D变换 */
+    background: url("../image.jpg") center/cover; /* 背景图片 */
+    filter: brightness(1.1); /* 亮度调整 */
+}
+
+/* 遮罩层 - 降低背景对比度，突出文字 */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 200vh;
+    background-color: rgba(0, 0, 0, 0.51); /* 半透明黑色遮罩 */
+    z-index: 2;
+    pointer-events: none; /* 允许点击穿透 */
+}
+
+/* 滚动指示器 - 提示用户向下滚动 */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+}
+
+.scroll-indicator img {
+    width: 100%;
+    height: 100%;
+    animation: floatUpDown 2s ease-in-out infinite; /* 应用浮动动画 */
+}
+
+/* 浮动动画效果 */
+@keyframes floatUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px); /* 最高点上移12px */
+    }
+}
+
+/* 滚动指示器悬浮效果 */
+.scroll-indicator:hover img {
+    filter: invert(45%) sepia(92%) saturate(1864%) hue-rotate(202deg) brightness(98%) contrast(93%);
+    transition: filter 0.3s ease;
+}
+
+/*---------------*\
+  5. 文本样式
+\*---------------*/
+/* 文本布局与排版
+ * 控制首屏文字的位置和样式
+ */
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 完全居中 */
+    z-index: 3;
+    width: 100%;
+    text-align: center;
+}
+
+/* 静态文本容器 */
+.static-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-family: var(--font-display);
+    color: var(--primary-color);
+}
+
+/* 文本行样式 */
+.line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 0;
+}
+
+/* 主要文本样式 */
+.text {
+    font-size: 8vw;          /* 响应式字体大小 */
+    font-weight: 900;        /* 加粗 */
+    text-shadow: 0 2px 2px var(--shadow-color); /* 文本阴影 */
+}
+
+/* 小标签文本样式 */
+.year-label {
+    font-family: var(--font-primary);
+    font-size: 0.8vw;       /* 相比主文本小很多 */
+    font-weight: 300;       /* 细体 */
+    color: var(--text-color);
+    opacity: 1;
+}
+
+/*---------------*\
+  6. 内容区域样式
+\*---------------*/
+/* 内容区基础样式
+ * 主要内容区域的布局和背景
+ */
+.content-area {
+    position: relative;
+    top: 0;
+    margin-top: -35px;     /* 负边距创造重叠效果 */
+    width: 100%;                    
+    min-height: auto;
+    height: auto;                   
+    background-color: var(--bg-color);
+    background-image: 
+        url("../assets/svg/background/dots.svg"), /* 点状背景纹理 */
+        linear-gradient(to bottom, rgba(56, 123, 232, 0.032), transparent 60%); /* 渐变背景 */
+    background-size: 20px 20px, 100% 100%;
+    background-position: center center;
+    background-attachment: fixed; /* 固定背景 */
+    z-index: 3;
+    border-radius: var(--border-radius) var(--border-radius) 0 0; /* 顶部圆角 */
+    padding-bottom: 280px; /* 底部填充空间给footer */
+}
+
+/* 内容区容器样式 */
+.container {
+    max-width: var(--content-width);
+    margin: -2px auto;
+    padding: 2px 0px;
+    position: relative;
+    background: linear-gradient(
+        to bottom,
+        var(--bg-color) 0%,
+        rgb(255, 255, 255) 100%
+    ); /* 从透明到白色的渐变 */
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+/* 项目分类区域样式
+ * 展示不同项目类型的区域
+ */
+.project-category-section {
+    margin-top: 340px;     /* 与顶部的距离 */
+    transform: scale(var(--project-section-scale));
+    transform-origin: center top;
+    position: relative;
+    z-index: 1;
+}
+
+/* 分类标题图标 */
+.category-title {
+    width: 250px;
+    margin-bottom: 80px;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(
+        to bottom,
+        var(--bg-color) 0%,
+        rgba(249, 250, 252, 0.97) 100%
+    ); /* 与内容区域相同的渐变 */
+}
+
+/* 项目分类容器 */
+.project-category {
+    position: relative;
+    z-index: 2;
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 0px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 三列布局 */
+    gap: 40px;
+}
+
+/* 项目卡片样式 */
+.category-item {
+    width: 100%;
+    aspect-ratio: 384/291; /* 保持固定宽高比 */
+    position: relative;
+    display: block;
+    transition: all var(--transition-normal) ease;
+    cursor: pointer;
+}
+
+/* 卡片悬浮效果 */
+.category-item:hover {
+    transform: translateY(-8px) scale(1.02); /* 上移并轻微放大 */
+    filter: brightness(1.05); /* 增加亮度 */
+}
+
+/* 图片切换效果 - 用于显示不同状态的图片 */
+.category-item .hover-hide,
+.category-item .hover-show {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all var(--transition-normal) ease;
+}
+
+.category-item .hover-show {
+    opacity: 0;
+    transform: translateY(10px); /* 初始向下偏移 */
+}
+
+/* 悬浮时的图片切换动画 */
+.category-item:hover .hover-hide {
+    opacity: 0;
+    transform: translateY(-10px); /* 向上移出 */
+}
+
+.category-item:hover .hover-show {
+    opacity: 1;
+    transform: translateY(0); /* 移入到原位置 */
+}
+
+/* 默认显示第一张图片,隐藏第二张 */
+.category-item .hover-show {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.category-item .hover-hide {
+    width: 100%;
+    height: 100%;
+}
+
+/* 悬浮时切换显示 */
+.category-item:hover .hover-hide {
+    display: none;
+}
+
+.category-item:hover .hover-show {
+    display: block;
+}
+
+/* 卡片内容样式 - 用于object标签内容 */
+.category-item object {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease;
+    transform-origin: top left;
+}
+
+/* 默认状态下显示版本1 */
+.category-item object:nth-child(2) {
+    opacity: 0;
+}
+
+/* 悬浮时显示版本2 */
+.category-item:hover object:nth-child(1) {
+    opacity: 0;
+}
+
+.category-item:hover object:nth-child(2) {
+    opacity: 1;
+}
+
+/* 工作经验区域样式
+ * 展示工作经历的区域
+ */
+.experience-section {
+    --experience-gap: 100px;          /* 经验项之间的间距 */
+    --experience-padding: 20px;       /* 经验项的内边距 */
+    --experience-border-color: rgba(222, 231, 255, 0.3); /* 边框颜色 */
+    --experience-hover-translate: -5px; /* 悬浮时上移距离 */
+    --experience-aspect-ratio: 384/78; /* 宽高比例 */
+    
+    margin-top: 300px;
+    transform: scale(var(--experience-section-scale));
+    transform-origin: center top;
+}
+
+/* 工作经验标题 */  
+.experience-title {
+    width: 220px;
+    margin-bottom: 150px;
+}
+
+/* 工作经验列表容器 */
+.experience-category {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    gap: var(--experience-gap);
+}
+
+/* 工作经验项基础样式 */
+.experience-item {
+    width: 100%;
+    aspect-ratio: var(--experience-aspect-ratio);
+    position: relative;
+    display: block;
+    padding: var(--experience-padding) 0;
+    margin: 0;
+    cursor: pointer;
+    border-bottom: 1px solid var(--experience-border-color); /* 底部分隔线 */
+    
+    /* 统一过渡效果 */
+    transition: 
+        transform var(--transition-normal) cubic-bezier(0.34, 1.56, 0.64, 1),
+        border-color var(--transition-normal) ease,
+        filter var(--transition-normal) ease;
+}
+
+/* 工作经验图片基础样式 */
+.experience-item .hover-hide,
+.experience-item .hover-show {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all var(--transition-normal) cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform, opacity;
+}
+
+/* 工作经验悬浮状态图片 - 初始隐藏 */
+.experience-item .hover-show {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* 工作经验项悬浮效果 */
+.experience-item:hover {
+    transform: translateY(var(--experience-hover-translate)); /* 上移 */
+    border-color: transparent; /* 隐藏边框 */
+    filter: brightness(1.05); /* 增加亮度 */
+}
+
+/* 悬浮时图片切换动画 */
+.experience-item:hover .hover-hide {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.experience-item:hover .hover-show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 特殊位置处理 */
+.experience-item:first-child {
+    padding-top: 50px;
+    margin-top: 0;
+}
+
+.experience-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: var(--experience-padding);
+}
+
+/* 游戏经验区域样式
+ * 展示游戏经历的区域
+ */
+.game-section {
+    margin-top: 300px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 50px; /* 减小底部间距 */
+    transform: scale(var(--game-section-scale));
+    transform-origin: center top;
+}
+
+/* 游戏经验背景纹理 */
+.game-section::after {
+    content: '';
+    position: absolute;
+    right: -120px;
+    bottom: -35px;
+    width: 1000px; /* 调整宽度以适应你的设计 */
+    height: 1000px; /* 调整高度以适应你的设计 */
+    background-image: url('../assets/svg/home/games/pattern.svg');
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: contain;
+    z-index: -1;
+    opacity: 0.8; /* 可以调整透明度 */
+    pointer-events: none; /* 确保不影响交互 */
+}
+
+/* 确保游戏内容在纹理上层 */
+.game-category {
+    position: relative;
+    z-index: 2;
+}
+
+/* 游戏经验标题 */
+.game-title {  
+    width: 220px;    
+    margin-bottom: 100px;
+    margin-left: 10px; /* 设置左边距与导航栏logo对齐 */
+}
+
+/* 游戏项目样式 */
+.game-item {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-left: 0px; /* 与导航logo对齐 */
+}
+
+/* 二次元游戏布局容器 */
+.game-type-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 70px; /* 控制不同游戏类型之间的间距 */
+}
+
+/* 游戏类型图标容器 - 新增 */
+.game-type-icon {
+    flex-shrink: 0;
+    margin-right: 150px; /* 控制图标和游戏列表之间的间距 */
+    width: 100px; /* 给一个固定宽度 */
+}
+
+/* 游戏类型图标 */
+.game-category-icon {
+    width: auto;
+    height: 40px;
+}
+
+/* 添加新的样式控制不同类型的位置 */
+.game-type-container:last-child {
+    margin-bottom: 0; /* 最后一个容器移除底部间距 */
+}
+
+/* 游戏列表样式 */
+.game-item-content {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 700px;
+    margin-top: 0;
+}
+
+/* 游戏图标波浪动画 */
+@keyframes waveIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 游戏图标统一样式 */
+.game-item object {
+    width: 100px;
+    height: auto;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.3s ease,
+        filter 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 添加平滑的过渡曲线 */
+    will-change: transform, opacity, filter;
+    transform-origin: center center;
+}
+
+/* 进入视口时的动画 */
+.game-item-content.animate object {
+    opacity: 1;
+    transform: translateY(0);
+    animation: waveIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 游戏图标悬浮效果 */
+.game-item object:hover {
+    transform: scale(1.15) translateY(-2px) !important;
+    filter: brightness(1.05) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: 
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 使用更平滑的动画曲线 */
+}
+
+/* 为每个图标设置不同的动画延迟 */
+.game-item-content.animate object:nth-child(1) { animation-delay: 0.1s; }
+.game-item-content.animate object:nth-child(2) { animation-delay: 0.2s; }
+.game-item-content.animate object:nth-child(3) { animation-delay: 0.3s; }
+.game-item-content.animate object:nth-child(4) { animation-delay: 0.4s; }
+.game-item-content.animate object:nth-child(5) { animation-delay: 0.5s; }
+.game-item-content.animate object:nth-child(6) { animation-delay: 0.6s; }
+
+/* 游戏项目样式 */
+.game-item {
+    width: auto;      /* 设置宽度为自动，根据内容自适应 */
+    position: relative; /* 启用相对定位，作为子元素的定位参考 */
+    display: block;    /* 设置为块级元素，独占一行 */
+}
+
+/* 游戏项目容器样式 */
+/* 游戏项目列表的容器样式
+ * 使用flex布局实现灵活的游戏项目排列
+ */
+.game-item-content {
+    width: auto;                 /* 宽度自适应内容 */
+    display: flex;              /* 使用弹性盒子布局 */
+    flex-wrap: nowrap;         /* 防止项目换行 */
+    flex-direction: revert;     /* 恢复默认的水平方向排列 */
+    align-items: revert-layer;  /* 恢复默认的对齐方式 */
+    gap: 90px;                 /* 项目之间的间距设置为50px */
+    margin-top: 0px;          /* 顶部外边距设置为60px */
+}
+
+/* 第一个标签样式单独控制 */
+.game-item-oooo {
+    width: auto; /* 改为自适应宽度 */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 60px;
+    margin-left: 0px;
+}
+
+/* 游戏分类图标样式 */
+.game-category-icon {
+    width: auto;
+    height: 40px; /* 设置固定高度为120px */
+}
+
+/* 游戏项目中的object标签样式 */
+.game-item object {
+    width: 100px; 
+    height: auto;
+    margin: 0;
+    transition: transform var(--transition-fast) ease; /* 添加过渡效果 */
+}
+
+/* 添加悬浮时的放大效果 */
+.game-item object:hover {
+    transform: scale(1.1); /* 悬浮时放大1.1倍 */
+}
+
+/* 第一个项目的object标签特殊处理 */
+.game-item-oooo object {
+    width: auto;
+    height: 120px; /* 设置固定高度为120px */
+}
+
+/*---------------*\
+  7. 响应式布局
+\*---------------*/
+/* 移动端适配
+ * 针对不同屏幕尺寸的样式调整
+ */
+/* 响应式布局 */
+@media screen and (max-width: 768px) {
+    /* ...mobile styles... */
+}
+
+/* 添加渐入动画基础样式 */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 为不同区域设置不同的延迟 */
+.fade-delay-1 { transition-delay: 0.2s; }
+.fade-delay-2 { transition-delay: 0.4s; }
+.fade-delay-3 { transition-delay: 0.6s; }
+
+/* 底部信息栏区域样式 */
+.footer-banner {
+    position: absolute;
+    bottom: -300px;
+    left: 0;
+    width: 100%;
+    z-index: 4;
+}
+
+/* 蓝色顶部区域 */
+.footer-banner-top {
+    width: 300vw;
+    height: 34px; /* 直接使用固定值 */
+    background-color: #387ce8; /* 直接使用颜色值 */
+    position: relative;
+    overflow: hidden;
+    transform: translateX(-50%);
+    left: 50%;
+}
+
+/* 白色底部区域 */
+.footer-banner-bottom {
+    width: 306vw;
+    height: 100px; /* 直接使用固定值 */
+    background-color: #ffffff;
+    padding: 132px 154px;
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative;
+}
+
+/* 白色区域主要内容容器 
+ * 控制底部信息栏白色区域的布局和间距
+ * - 使用最大宽度限制内容区域
+ * - 垂直方向的弹性盒子布局
+ * - 设置子元素之间的间距
+ */
+.footer-content {
+    max-width: 1300px;                 /* 缩小最大宽度 */
+    margin: -55px auto;                     /* 水平居中对齐 */
+    display: flex;                      /* 启用弹性盒子布局 */
+    flex-direction: column;             /* 垂直排列子元素 */
+    gap: 60px;                         /* 子元素之间的间距 */
+}
+
+/* 第一行布局：Logo和联系方式 */
+.footer-top {
+    display: flex;
+    justify-content: space-between;     /* 两端对齐 */
+    align-items: center;
+    width: 100%;                       /* 占满容器宽度 */
+}
+
+/* Norlin Logo 标题部分 */
+.footer-header {
+    width: 120px;                      /* 缩小 Logo 大小 */
+    height: auto;
+}
+
+/* 联系方式组 */
+.footer-contact {
+    align-items: center;
+    justify-content: flex-end;         /* 靠右对齐 */
+    gap: 80px;                         /* 增加联系方式之间的间距 */
+    margin-left: 100px;                /* 与 Logo 保持距离 */
+}
+
+/* 水平布局容器 */
+.footer-grid {
+    display: flex;
+    justify-content: space-between; /* 改为两端对齐 */
+    align-items: center;
+    width: 100%; /* 确保容器占满宽度 */
+}
+
+/* 联系方式组 */
+.footer-contact {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.contact-item:hover {
+    color: #387ce8;
+}
+
+/* 修复图标大小和比例 */
+.contact-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px; /* 防止图标被压缩 */
+    min-height: 24px; /* 防止图标被压缩 */
+    object-fit: contain; /* 保持图标比例 */
+}
+
+.contact-item span {
+    font-size: 14px;
+    white-space: nowrap; /* 防止文本换行 */
+    font-family: var(--font-nav); /* 添加导航栏同样的字体变量 */
+}
+
+/* 横线分隔 */
+.footer-divider {
+    width: 350vw;  /* 使用更大的视窗宽度 */
+    height: 1px;  /* 使用更大的视窗宽度 */
+    margin: -20px 0 0;  /* 调整上边距 */
+    background-color: #86baff68;  /* 调整上边距 */
+    margin-left: calc(-70vw + 50%);  /* 使横线居中且延伸到视窗边缘 */
+}
+
+/* 版权信息 */
+.footer-copyright {
+    width: 120px;  /* 调整版权信息宽度 */
+    margin: -30px 0 0;  /* 调整上边距 */
+}
+
+/* 过渡图案样式 */
+.footer-pattern {
+    width: 106%;
+    height: 60%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 12px;
+    background-image: url('../assets/svg/home/footer/norlin-pattern.svg');
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: contain;
+    opacity: 1;
+}

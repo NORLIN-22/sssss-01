@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" no-cache ">
+    <meta http-equiv="Expires" content="0">
+    <title>Loading - Norlin Design</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .loading-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* NORLIN Logo样式 */
+        .norlin-logo {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: auto;
+            fill: #ffffff;  /* 改为白色 */
+            opacity: 0;
+            animation: logoFadeIn 0.5s ease forwards;
+        }
+
+        /* 水泡动画容器 */
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        /* 主要动画 */
+        @keyframes logoFadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+
+        /* 溶解过渡动画 */
+        .dissolve-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+
+        .dissolve-overlay.active {
+            opacity: 1;
+        }
+    </style>
+    <script>
+        // 资源预加载
+        async function preloadResources() {
+            return new Promise((resolve) => {
+                const resources = [
+                    'css/main.css',
+                    'css/animations.css',
+                    'css/responsive.css',
+                    'js/main.js',
+                    'image.jpg'
+                ];
+                
+                let loaded = 0;
+                resources.forEach(src => {
+                    const link = document.createElement(src.endsWith('.css') ? 'link' : 'script');
+                    if (src.endsWith('.css')) {
+                        link.rel = 'stylesheet';
+                        link.href = src;
+                    } else if (src.endsWith('.js')) {
+                        link.src = src;
+                    }
+                    
+                    link.onload = () => {
+                        loaded++;
+                        if (loaded === resources.length) {
+                            resolve();
+                        }
+                    };
+                    document.head.appendChild(link);
+                });
+                
+                // 预加载图片
+                const img = new Image();
+                img.src = 'image.jpg';
+                img.onload = () => {
+                    loaded++;
+                    if (loaded === resources.length) {
+                        resolve();
+                    }
+                };
+            });
+        }
+
+        // 页面加载完成后开始预加载
+        window.addEventListener('load', async () => {
+            createBubbles();
+            
+            try {
+                await preloadResources();
+                // 设置加载完成标记
+                sessionStorage.setItem('loaded', 'true');
+                
+                // 执行过渡动画
+                document.querySelector('.dissolve-overlay').classList.add('active');
+                
+                // 延迟跳转确保动画完成
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 800);
+            } catch (error) {
+                console.error('资源加载失败:', error);
+            }
+        });
+
+        // 创建水泡动画
+        function createBubbles() {
+            const bubbles = document.querySelector('.bubbles');
+            for (let i = 0; i < 50; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.width = `${Math.random() * 30 + 10}px`;
+                bubble.style.height = bubble.style.width;
+                bubble.style.animationDelay = `${Math.random() * 2}s`;
+                bubbles.appendChild(bubble);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="loading-container">
+        <!-- 更新 NORLIN Logo SVG -->
+        <svg t="1740108913240" class="norlin-logo" viewBox="0 0 4002 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 548.706046V200.815819q0-90.771565 54.62479-145.815969T200.815415 0.000405q89.91735 0 138.18798 53.425892t48.195699 153.039329v342.24042H228.165275V250.719948q0-49.004956-35.352505-49.004955-32.969695 0-32.969695 49.004955v297.986098z"></path>
+            <path d="M678.396432 0.000405a281.426319 281.426319 0 0 1 243.421252 139.371892 276.106209 276.106209 0 0 1 0 278.743784 282.550286 282.550286 0 0 1-384.007029 102.02622A276.360975 276.360975 0 0 1 434.97518 418.116081a276.106209 276.106209 0 0 1 0-278.743784A281.426319 281.426319 0 0 1 678.396432 0.000405z m0 423.795455q59.255534 0 100.962197-61.60837T821.035321 214.303422c0-57.502145-14.042093 52.092118-42.141265 10.490357s-61.593385-62.282751-100.497624-62.282751-72.413439 20.770908-100.512611 62.282751-42.141265-68.052448-42.141265-10.490357 13.892231 106.776853 41.691678 147.839109 61.428536 61.65333 100.962198 61.653329z"></path>
+            <path d="M1127.039049 157.46067v391.245376H967.975257V12.858586h204.052439q94.008589 0 148.228751 49.454542t54.220162 128.881535c0 54.62479-11.98898 136.569468-151.360872 136.569468l228.839655 220.926928H1150.342628V238.596092h12.843195q50.623468 0 50.623468-43.370135 0-37.765287-58.656084-37.765287z"></path>
+            <path d="M1381.535121 12.858586h159.858062v217.300262q0 38.574543 11.98898 50.21884t46.592173 11.644296h8.841873v256.684062h-42.590852q-86.74027 0-135.760212-50.953165T1381.535121 356.672559zM1781.607383 111.902546v436.8035h-159.063792V111.902546zM1792.157685 548.706046V200.815819q0-90.771565 54.62479-145.815969T1993.003072 0.000405q89.91735 0 138.172994 53.425892t48.210686 153.039329v342.24042h-159.063792V206.465626q0-48.974983-35.352505-49.004956-32.969695 0-32.969694 49.004956v342.24042zM1622.543591 12.858586h159.063792v92.06038h-159.063792z"></path>
+        </svg>
+
+        <!-- 水泡动画容器 -->
+        <div class="bubbles"></div>
+
+        <!-- 溶解过渡层 -->
+        <div class="dissolve-overlay"></div>
+    </div>
+</body>
+</html>
