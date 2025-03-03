@@ -1044,14 +1044,14 @@
             </div>
 
             <!-- 简单的联系表单 -->
-            <form id="contactForm" action="https://formsubmit.co/2216921192@qq.com" method="POST" enctype="multipart/form-data">
-                <!-- FormSubmit 配置 -->
+            <form id="contactForm" action="https://formsubmit.co/2216921192@qq.com" method="POST">
+                <!-- FormSubmit配置 -->
                 <input type="hidden" name="_subject" value="来自个人网站的新消息">
                 <input type="hidden" name="_next" value="https://norlin-22.github.io/sssss-01/pages/thanks.html">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_autoresponse" value="感谢您的留言，我会尽快回复您。">
-                
+                <input type="hidden" name="_autoresponse" value="感谢您的留言,我会尽快回复您。">
+
                 <!-- 表单字段 -->
                 <div class="form-group">
                     <label for="name">您的姓名</label>
@@ -1068,22 +1068,6 @@
                     <textarea name="message" id="message" rows="6" required></textarea>
                 </div>
 
-                <!-- 添加文件上传部分 -->
-                <div class="form-group">
-                    <label>附件（可选）</label>
-                    <div class="file-upload">
-                        <input type="file" id="attachment" name="attachment" class="file-input" multiple>
-                        <label for="attachment" class="file-label">
-                            <span class="file-text">点击或拖拽文件到这里</span>
-                            <span class="file-info">支持多个文件，单个文件最大 10MB</span>
-                        </label>
-                        <div class="selected-files"></div>
-                    </div>
-                </div>
-
-                <!-- 可选：将表单提交后跳转到感谢页面 -->
-                <input type="hidden" name="redirect" value="https://norlin-22.github.io/sssss-01/pages/thanks.html">
-                
                 <button type="submit" class="submit-btn">
                     <span class="btn-text">发送消息</span>
                     <div class="loading-spinner"></div>
@@ -1166,8 +1150,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('contactForm');
             if (form) {
-                form.addEventListener('submit', async function(e) {
-                    e.preventDefault();
+                form.addEventListener('submit', function(e) {
+                    // 让表单正常提交到FormSubmit
                     const submitBtn = form.querySelector('.submit-btn');
                     const btnText = submitBtn.querySelector('.btn-text');
                     const spinner = submitBtn.querySelector('.loading-spinner');
@@ -1176,38 +1160,6 @@
                     btnText.style.display = 'none';
                     spinner.style.display = 'inline-block';
                     submitBtn.disabled = true;
-
-                    try {
-                        // 创建不包含文件的表单数据
-                        const formData = new FormData();
-                        formData.append('access_key', form.querySelector('[name="access_key"]').value);
-                        formData.append('from_name', form.querySelector('[name="from_name"]').value);
-                        formData.append('subject', form.querySelector('[name="subject"]').value);
-                        formData.append('replyto', form.querySelector('[name="email"]').value);
-                        formData.append('name', form.querySelector('[name="name"]').value);
-                        formData.append('email', form.querySelector('[name="email"]').value);
-                        formData.append('message', form.querySelector('[name="message"]').value);
-
-                        const response = await fetch('https://api.web3forms.com/submit', {
-                            method: 'POST',
-                            body: formData
-                        });
-
-                        const result = await response.json();
-                        
-                        if (result.success) {
-                            window.location.href = './thanks.html';
-                        } else {
-                            throw new Error(result.message || '发送失败');
-                        }
-                    } catch (error) {
-                        console.error('发送失败:', error);
-                        showToast('error');
-                    } finally {
-                        btnText.style.display = 'inline-block';
-                        spinner.style.display = 'none';
-                        submitBtn.disabled = false;
-                    }
                 });
             }
         });
