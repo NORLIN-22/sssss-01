@@ -147,44 +147,21 @@
     </div>
 
     <script>
-        // 如果已经加载过,直接跳到首页
-        if (sessionStorage.getItem('loaded')) {
+        // 如果已经完成加载则直接跳转到首页
+        if (localStorage.getItem('initialLoadDone')) {
             window.location.replace('index.html');
         }
 
-        // 预加载首页需要的资源
         async function preloadResources() {
             const resources = [
                 'css/main.css',
                 'css/animations.css',
                 'css/responsive.css',
-                'js/main.js',
-                // 添加首页需要的关键SVG资源
-                'assets/svg/home/projects/title.svg',
-                'assets/svg/home/projects/graphics-1.svg',
-                'assets/svg/home/projects/graphics-2.svg',
-                'assets/svg/home/projects/illustration-1.svg',
-                'assets/svg/home/projects/illustration-2.svg',
-                'assets/svg/home/projects/frontend-1.svg',
-                'assets/svg/home/projects/frontend-2.svg'
+                'js/main.js'
             ];
 
-            const promises = resources.map(src => {
-                if (src.endsWith('.css')) {
-                    return fetch(src).then(res => res.text());
-                } else if (src.endsWith('.js')) {
-                    return fetch(src).then(res => res.text());
-                } else if (src.endsWith('.svg')) {
-                    return new Promise((resolve) => {
-                        const img = new Image();
-                        img.onload = () => resolve();
-                        img.src = src;
-                    });
-                }
-            });
-
             try {
-                await Promise.all(promises);
+                await Promise.all(resources.map(src => fetch(src)));
                 return true;
             } catch (error) {
                 console.error('Resource loading failed:', error);
@@ -192,16 +169,13 @@
             }
         }
 
-        // 页面加载完成后开始预加载
-        window.addEventListener('load', async () => {
-            const success = await preloadResources();
+        window.addEventListener('DOMContentLoaded', async () => {
+            await preloadResources();
             
-            if (success) {
-                // 设置加载完成标记
-                sessionStorage.setItem('loaded', 'true');
-            }
+            // 设置加载完成标记
+            localStorage.setItem('initialLoadDone', 'true');
             
-            // 不管成功失败都跳转,防止卡在loading页面
+            // 延迟跳转,让动画完成
             setTimeout(() => {
                 window.location.replace('index.html');
             }, 2000);

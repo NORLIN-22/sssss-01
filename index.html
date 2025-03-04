@@ -12,11 +12,10 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <script>
-        // 简化检查逻辑,只在未加载时重定向
-        if (!sessionStorage.getItem('loaded')) {
+        // 如果是首次访问,跳转到loading页面
+        if (!localStorage.getItem('initialLoadDone')) {
             window.location.replace('loading.html');
         }
-        // 不需要清除标记,这样刷新页面时就不会重复加载了
     </script>
 </head>
 <body class="dark-elements">
