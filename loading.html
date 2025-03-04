@@ -147,6 +147,9 @@
     </div>
 
     <script>
+        // 设置已加载标记
+        sessionStorage.setItem('loaded', 'true');
+        
         // 添加页面加载完成后的跳转
         window.addEventListener('load', () => {
             setTimeout(() => {
