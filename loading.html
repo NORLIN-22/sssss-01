@@ -147,21 +147,54 @@
     </div>
 
     <script>
-        // 如果已经完成加载则直接跳转到首页
-        if (localStorage.getItem('initialLoadDone')) {
-            window.location.replace('index.html');
-        }
-
+        // 加载首页所需的所有资源
         async function preloadResources() {
+            // 待加载的资源列表
             const resources = [
-                'css/main.css',
-                'css/animations.css',
-                'css/responsive.css',
-                'js/main.js'
+                // CSS文件
+                { type: 'css', url: 'css/main.css' },
+                { type: 'css', url: 'css/animations.css' },
+                { type: 'css', url: 'css/responsive.css' },
+                // JS文件
+                { type: 'js', url: 'js/main.js' },
+                // 关键SVG/图片资源
+                { type: 'image', url: 'favicon.svg' },
+                { type: 'image', url: 'assets/svg/home/projects/title.svg' },
+                // ... 添加其他关键资源
             ];
 
+            // 创建一个HTML元素来预加载并确保资源加载完成
+            const preloadResource = (resource) => {
+                return new Promise((resolve, reject) => {
+                    let element;
+                    
+                    switch(resource.type) {
+                        case 'css':
+                            element = document.createElement('link');
+                            element.rel = 'stylesheet';
+                            element.href = resource.url;
+                            break;
+                        case 'js':
+                            element = document.createElement('script');
+                            element.src = resource.url;
+                            break;
+                        case 'image':
+                            element = new Image();
+                            element.src = resource.url;
+                            break;
+                    }
+
+                    element.onload = () => resolve();
+                    element.onerror = () => reject();
+
+                    if (resource.type !== 'image') {
+                        document.head.appendChild(element);
+                    }
+                });
+            };
+
             try {
-                await Promise.all(resources.map(src => fetch(src)));
+                await Promise.all(resources.map(preloadResource));
                 return true;
             } catch (error) {
                 console.error('Resource loading failed:', error);
@@ -169,17 +202,19 @@
             }
         }
 
-        window.addEventListener('DOMContentLoaded', async () => {
-            await preloadResources();
+        async function init() {
+            // 预加载所有资源
+            const success = await preloadResources();
             
-            // 设置加载完成标记
-            localStorage.setItem('initialLoadDone', 'true');
+            // 不管成功失败,给loading动画留足时间播放
+            await new Promise(resolve => setTimeout(resolve, 2000));
             
-            // 延迟跳转,让动画完成
-            setTimeout(() => {
-                window.location.replace('index.html');
-            }, 2000);
-        });
+            // 跳转到首页
+            window.location.replace('index.html');
+        }
+
+        // 启动加载流程
+        init();
     </script>
 </body>
 </html>

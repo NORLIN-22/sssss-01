@@ -16,6 +16,10 @@
         if (!localStorage.getItem('initialLoadDone')) {
             window.location.replace('loading.html');
         }
+        // 确保页面从loading页面进入
+        if (!document.referrer.includes('loading.html')) {
+            window.location.replace('loading.html');
+        }
     </script>
 </head>
 <body class="dark-elements">
