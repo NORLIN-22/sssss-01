@@ -147,6 +147,11 @@
     </div>
 
     <script>
+        // 如果已经加载过,直接跳到首页
+        if (sessionStorage.getItem('loaded')) {
+            window.location.replace('index.html');
+        }
+
         // 预加载首页需要的资源
         async function preloadResources() {
             const resources = [
@@ -189,25 +194,17 @@
 
         // 页面加载完成后开始预加载
         window.addEventListener('load', async () => {
-            // 设置加载标记
-            sessionStorage.setItem('loading', 'true');
-            
-            // 预加载资源
             const success = await preloadResources();
             
             if (success) {
-                // 设置完成标记
+                // 设置加载完成标记
                 sessionStorage.setItem('loaded', 'true');
-                // 延迟跳转,让动画完成
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
-            } else {
-                // 加载失败也跳转,但不设置loaded标记
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
             }
+            
+            // 不管成功失败都跳转,防止卡在loading页面
+            setTimeout(() => {
+                window.location.replace('index.html');
+            }, 2000);
         });
     </script>
 </body>

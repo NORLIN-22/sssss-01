@@ -25,6 +25,12 @@
             sessionStorage.removeItem('loaded');
         });
     </script>
+    <script>
+        // 只在第一次访问时重定向到loading页面
+        if (!sessionStorage.getItem('loaded')) {
+            window.location.replace('loading.html');
+        }
+    </script>
 </head>
 <body class="dark-elements">
     <!-- 导航菜单 -->
