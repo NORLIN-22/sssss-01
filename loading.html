@@ -147,6 +147,11 @@
     </div>
 
     <script>
+        // 检查是否需要加载
+        if (sessionStorage.getItem('loadingCompleted')) {
+            window.location.replace('index.html');
+        }
+
         // 加载首页所需的所有资源
         async function preloadResources() {
             // 待加载的资源列表
@@ -206,11 +211,14 @@
             // 预加载所有资源
             const success = await preloadResources();
             
-            // 不管成功失败,给loading动画留足时间播放
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            // 设置加载完成标记
+            sessionStorage.setItem('loadingCompleted', 'true');
+            sessionStorage.removeItem('needsLoading');
             
-            // 跳转到首页
-            window.location.replace('index.html');
+            // 延迟跳转,让动画完成
+            setTimeout(() => {
+                window.location.replace('index.html');
+            }, 2000);
         }
 
         // 启动加载流程

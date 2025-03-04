@@ -393,33 +393,28 @@ body {
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 5;
-    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+}
+
+.scroll-arrow {
     width: 32px;
-    height: 32px;
-    transition: transform 0.3s ease;
+    height: auto;
+    opacity: 0.7;
+    animation: bounce 2s infinite;
 }
 
-.scroll-indicator img {
-    width: 100%;
-    height: 100%;
-    animation: floatUpDown 2s ease-in-out infinite; /* 应用浮动动画 */
-}
-
-/* 浮动动画效果 */
-@keyframes floatUpDown {
-    0%, 100% {
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
     }
-    50% {
-        transform: translateY(-12px); /* 最高点上移12px */
+    40% {
+        transform: translateY(-8px);
     }
-}
-
-/* 滚动指示器悬浮效果 */
-.scroll-indicator:hover img {
-    filter: invert(45%) sepia(92%) saturate(1864%) hue-rotate(202deg) brightness(98%) contrast(93%);
-    transition: filter 0.3s ease;
+    60% {
+        transform: translateY(-4px);
+    }
 }
 
 /*---------------*\
@@ -816,8 +811,9 @@ body {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    width: 700px;
-    margin-top: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 /* 游戏图标波浪动画 */
@@ -832,99 +828,55 @@ body {
     }
 }
 
-/* 游戏图标统一样式 */
-.game-item object {
+/* 游戏图标基础样式 */
+.game-item-content object {
     width: 100px;
     height: auto;
     margin: 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 
-        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-        opacity 0.3s ease,
-        filter 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 添加平滑的过渡曲线 */
-    will-change: transform, opacity, filter;
-    transform-origin: center center;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
 }
 
-/* 进入视口时的动画 */
-.game-item-content.animate object {
-    opacity: 1;
-    transform: translateY(0);
-    animation: waveIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+/* 图标悬浮效果 */
+.game-item-content object:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
-/* 游戏图标悬浮效果 */
-.game-item object:hover {
-    transform: scale(1.15) translateY(-2px) !important;
-    filter: brightness(1.05) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-    transition: 
-        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-        filter 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 使用更平滑的动画曲线 */
+/* 其他图标缩小效果 */
+.game-type-container:hover .game-item-content object:not(:hover) {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+    opacity: 0.7;
 }
 
-/* 为每个图标设置不同的动画延迟 */
-.game-item-content.animate object:nth-child(1) { animation-delay: 0.1s; }
-.game-item-content.animate object:nth-child(2) { animation-delay: 0.2s; }
-.game-item-content.animate object:nth-child(3) { animation-delay: 0.3s; }
-.game-item-content.animate object:nth-child(4) { animation-delay: 0.4s; }
-.game-item-content.animate object:nth-child(5) { animation-delay: 0.5s; }
-.game-item-content.animate object:nth-child(6) { animation-delay: 0.6s; }
-
-/* 游戏项目样式 */
-.game-item {
-    width: auto;      /* 设置宽度为自动，根据内容自适应 */
-    position: relative; /* 启用相对定位，作为子元素的定位参考 */
-    display: block;    /* 设置为块级元素，独占一行 */
-}
-
-/* 游戏项目容器样式 */
-/* 游戏项目列表的容器样式
- * 使用flex布局实现灵活的游戏项目排列
- */
-.game-item-content {
-    width: auto;                 /* 宽度自适应内容 */
-    display: flex;              /* 使用弹性盒子布局 */
-    flex-wrap: nowrap;         /* 防止项目换行 */
-    flex-direction: revert;     /* 恢复默认的水平方向排列 */
-    align-items: revert-layer;  /* 恢复默认的对齐方式 */
-    gap: 90px;                 /* 项目之间的间距设置为50px */
-    margin-top: 0px;          /* 顶部外边距设置为60px */
-}
-
-/* 第一个标签样式单独控制 */
-.game-item-oooo {
-    width: auto; /* 改为自适应宽度 */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 60px;
-    margin-left: 0px;
-}
-
-/* 游戏分类图标样式 */
-.game-category-icon {
-    width: auto;
-    height: 40px; /* 设置固定高度为120px */
-}
-
-/* 游戏项目中的object标签样式 */
-.game-item object {
-    width: 100px; 
+/* 游戏图标统一样式 */
+.game-item-content object {
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    transition-duration: 0.3s;
+    transition-property: transform;
+    width: 100px;
     height: auto;
     margin: 0;
-    transition: transform var(--transition-fast) ease; /* 添加过渡效果 */
 }
 
-/* 添加悬浮时的放大效果 */
-.game-item object:hover {
-    transform: scale(1.1); /* 悬浮时放大1.1倍 */
+.game-item-content object:hover {
+    transform: scale(1.1);
 }
 
-/* 第一个项目的object标签特殊处理 */
-.game-item-oooo object {
-    width: auto;
-    height: 120px; /* 设置固定高度为120px */
+.game-type-container:hover .game-item-content object:not(:hover) {
+    transform: scale(0.95);
+    opacity: 0.7;
 }
 
 /*---------------*\
