@@ -10,10 +10,35 @@
     <link rel="stylesheet" href="../css/responsive.css">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <style>
-        /* 项目页面特定样式 */
+        /* 移除原背景样式 */
         body {
-            background-color: var(--bg-color);
+            margin: 0;
             min-height: 100vh;
+            position: relative;
+            font-family: var(--font-primary);
+        }
+        
+        /* 更新内容区域样式,与首页保持一致 */
+        .content-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding-top: calc(var(--nav-height) + 40px);
+            background-color: var(--bg-color);
+            background-image: 
+                url("../assets/svg/background/dots.svg"),
+                linear-gradient(to bottom, rgba(56, 123, 232, 0.032), transparent 60%);
+            background-size: 20px 20px, 100% 100%;
+            background-position: center center;
+            background-attachment: fixed;
+            z-index: 3;
+        }
+
+        /* 表单容器样式更新 - 移除多余效果 */
+        .contact-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
         .nav-menu {
@@ -39,13 +64,6 @@
             transform: none;
         }
 
-        /* 内容区域样式 */
-        .content-container {
-            max-width: var(--content-width);
-            margin: 0 auto;
-            padding: calc(var(--nav-height) + 40px) 20px 60px;
-        }
-
         /* 下拉菜单样式继承自主页白色区域样式 */
         .dropdown-content {
             background: rgba(255, 255, 255, 0.98);
@@ -62,12 +80,6 @@
         .dropdown-item:hover {
             background: transparent;
             color: #387ce8 !important;
-        }
-
-        .contact-form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px 20px;
         }
 
         .contact-form-container h1 {
@@ -876,7 +888,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.2s ease;
+            transition: all 0.2s ease;
             z-index: 100;
             border: 1px solid rgba(56, 124, 232, 0.1);
             pointer-events: none;
