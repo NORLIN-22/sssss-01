@@ -12,11 +12,17 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <script>
-        // 检查是否经过loading页面
+        // 检查加载状态
         window.addEventListener('DOMContentLoaded', () => {
-            if (!sessionStorage.getItem('loaded')) {
+            // 如果没有loading标记或loaded标记,说明是直接访问
+            if (!sessionStorage.getItem('loading') || !sessionStorage.getItem('loaded')) {
                 window.location.replace('loading.html');
+                return;
             }
+            
+            // 清除标记,这样刷新页面时会重新加载
+            sessionStorage.removeItem('loading');
+            sessionStorage.removeItem('loaded');
         });
     </script>
 </head>
