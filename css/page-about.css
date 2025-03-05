@@ -134,6 +134,24 @@ body {
     width: 200px;
 }
 
+/* sojust SVG定位 - 添加在公司组SVG后 */
+.sojust-svg {
+    width: 160px;
+    position: absolute;
+    left: 0px;
+    top: 530px; /* 在公司组下方 */
+    z-index: 1;
+}
+
+/* zhonjie SVG定位 */
+.zhonjie-svg {
+    width: 900px;
+    position: absolute;
+    left: 30px;
+    top: 560px; /* 在sojust下方 */
+    z-index: 1;
+}
+
 /* SVG大小控制 */
 .hello-svg {
     width: 140px;
@@ -223,5 +241,17 @@ body {
     .anqi-svg,
     .qumo-svg {
         width: 150px;
+    }
+
+    .sojust-svg {
+        width: 90%;
+        top: 800px;
+        left: 10px;
+    }
+
+    .zhonjie-svg {
+        width: 90%;
+        top: 900px;
+        left: 10px;
     }
 }
