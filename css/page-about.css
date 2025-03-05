@@ -172,6 +172,7 @@ body {
     gap: 200px; /* SVG之间的间距 */
     z-index: 1;
     transform: scale(0.8); /* 整体缩小到80% */
+    align-items: center;
 }
 
 /* 各个社交媒体SVG定位 */
@@ -308,6 +309,18 @@ body {
     .billbill-svg {
         width: 150px;
     }
+
+    .social-media-group a {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .social-link .zk-svg,
+    .social-link .wb-svg,
+    .social-link .billbill-svg {
+        width: 150px;
+    }
 }
 
 /* 高度控制器 */
@@ -319,4 +332,65 @@ body {
     :root {
         --min-content-height: 1600px; /* 移动端调整最小高度 */
     }
+}
+
+/* 社交媒体链接样式 */
+.social-media-group a {
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.social-media-group a:hover {
+    transform: translateY(-5px);
+}
+
+/* 社交媒体链接样式更新 */
+.social-link {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+}
+
+.social-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.social-link a {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover a {
+    transform: translateY(-5px);
+}
+
+.social-link {
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.social-link .zk-svg {
+    width: 180px;
+    height: auto;
+}
+
+.social-link .wb-svg {
+    width: 90px;
+    height: auto;
+}
+
+.social-link .billbill-svg {
+    width: 110px;
+    height: auto;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
 }
