@@ -101,7 +101,7 @@ body {
 
 /* companies SVG定位 */
 .companies-svg {
-    width: 340px;
+    width: 330px;
     position: absolute;
     left: 0;
     top: 320px; /* 在me svg下方 */
@@ -136,7 +136,7 @@ body {
 
 /* sojust SVG定位 - 添加在公司组SVG后 */
 .sojust-svg {
-    width: 160px;
+    width: 170px;
     position: absolute;
     left: 0px;
     top: 530px; /* 在公司组下方 */
@@ -150,6 +150,41 @@ body {
     left: 30px;
     top: 560px; /* 在sojust下方 */
     z-index: 1;
+}
+
+/* social SVG定位 */
+.social-svg {
+    width: 250px;
+    position: absolute;
+    left: 0px;
+    top: 920px; /* 在zhonjie下方 */
+    z-index: 1;
+}
+
+/* 社交媒体SVG组样式 */
+.social-media-group {
+    position: absolute;
+    left: 0;
+    top: 1900px; /* 在social svg下方 */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 200px; /* SVG之间的间距 */
+    z-index: 1;
+    transform: scale(0.8); /* 整体缩小到80% */
+}
+
+/* 各个社交媒体SVG定位 */
+.zk-svg {
+    width: 180px;
+}
+
+.wb-svg {
+    width: 90px;
+}
+
+.billbill-svg {
+    width: 110px;
 }
 
 /* SVG大小控制 */
@@ -190,7 +225,7 @@ body {
     margin: 0 auto;
     padding: 40px 20px;
     position: relative;
-    min-height: 800px; /* 确保容器有足够高度容纳绝对定位元素 */
+    min-height: var(--min-content-height); /* 使用变量控制最小高度 */
 }
 
 /* 响应式调整 */
@@ -253,5 +288,35 @@ body {
         width: 90%;
         top: 900px;
         left: 10px;
+    }
+    
+    .social-svg {
+        width: 90%;
+        top: 1000px;
+        left: 10px;
+    }
+
+    .social-media-group {
+        top: 1100px;
+        flex-direction: column; /* 移动端改为垂直排列 */
+        gap: 20px;
+        align-items: center;
+    }
+
+    .zk-svg,
+    .wb-svg,
+    .billbill-svg {
+        width: 150px;
+    }
+}
+
+/* 高度控制器 */
+:root {
+    --min-content-height: 2200px; /* 设置最小内容高度 */
+}
+
+@media (max-width: 768px) {
+    :root {
+        --min-content-height: 1600px; /* 移动端调整最小高度 */
     }
 }
