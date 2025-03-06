@@ -71,11 +71,16 @@
         }
 
         .contact-form-container h1 {
-            color: var(--secondary-color);
-            font-family: var(--font-nav);
-            font-size: 2rem;
-            margin-bottom: 40px;
             text-align: center;
+            margin-bottom: 40px;
+            font-family: var(--font-nav), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 添加fallback字体 */
+        }
+
+        .contact-title {
+            height: 90px; /* 调整SVG图片高度 */
+            width: auto;
+            display: inline-block;
+            font-family: inherit; /* 继承父元素字体 */
         }
 
         .contact-form {
@@ -87,13 +92,15 @@
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 8px; /* 减小标签和输入框之间的间距,原来是20px */
+            margin-bottom: 20px; /* 增加表单项之间的间距 */
         }
 
         .form-group label {
             color: var(--secondary-color);
             font-family: var(--font-nav);
             font-size: 0.9rem;
+            margin-bottom: 4px; /* 微调标签底部间距 */
         }
 
         .form-group input,
@@ -237,21 +244,24 @@
 
         /* 添加新的卡片样式 */
         .contact-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            display: flex; /* 改为flex布局 */
+            justify-content: center;
+            gap: 16px; /* 减小间距 */
             margin-top: 40px;
+            flex-wrap: wrap; /* 确保在小屏幕上可以换行 */
         }
 
         .contact-card {
+            flex: 0 0 200px; /* 固定宽度 */
             display: flex;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
             background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(56, 124, 232, 0.2);
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative; /* 为复制提示添加定位上下文 */
         }
 
         .contact-card:hover {
@@ -260,10 +270,40 @@
             border-color: var(--accent-color);
         }
 
+        /* 添加复制成功提示 */
+        .copy-success {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .contact-card.copied .copy-success {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .contact-cards {
+                gap: 12px;
+            }
+            .contact-card {
+                flex: 0 0 calc(50% - 6px); /* 在小屏幕上两列显示 */
+            }
+        }
+
         .contact-card-icon {
             width: 32px;
             height: 32px;
             margin-right: 16px;
+            color: var(--accent-color); /* 添加这一行，使用主题强调色 */
         }
 
         .contact-card-info {
@@ -441,7 +481,7 @@
         /* 添加提示框样式 */
         .toast {
             position: fixed;
-            top: 20px;
+            bottom: 20px; /* 改为从底部计算 */
             right: 20px;
             padding: 16px 24px;
             border-radius: 8px;
@@ -544,7 +584,393 @@
         .toast-actions li:last-child {
             margin-bottom: 0;
         }
+
+        /* 更新联系卡片布局样式 */
+        .contact-cards {
+            display: flex;
+            justify-content: center;
+            gap: 32px;  /* 增加图标间距 */
+            margin: 40px auto;
+            flex-wrap: nowrap; /* 禁止换行，保持横向排列 */
+        }
+
+        .contact-card {
+            width: 56px;  /* 稍微增大尺寸 */
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);  /* 使用背景色 */
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(56, 124, 232, 0.1);  /* 添加轻微阴影 */
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            background: var(--accent-color);
+            box-shadow: 0 4px 12px rgba(56, 124, 232, 0.2);
+        }
+
+        .contact-card-icon {
+            width: 28px;  /* 增大图标尺寸 */
+            height: 28px;
+            transition: all 0.3s ease;
+            color: var(--accent-color);  /* 默认蓝色 */
+        }
+
+        .contact-card:hover .contact-card-icon {
+            filter: brightness(0) invert(1);
+            transform: scale(1.1);
+        }
+
+        .contact-card-info {
+            display: none;
+        }
+
+        /* 调整二维码弹窗样式 */
+        .qr-popup {
+            position: absolute;
+            top: calc(100% + 16px); /* 改为从上方计算位置 */
+            left: 50%;
+            transform: translateX(-50%) scale(0.95);
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: 1px solid rgba(56, 124, 232, 0.1);
+        }
+
+        .qr-popup img {
+            width: 160px;
+            height: 160px;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .qr-popup::after {
+            content: '';
+            position: absolute;
+            bottom: 100%; /* 改为从底部指向上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-bottom-color: white; /* 改为底部边框颜色 */
+            border-top-color: transparent; /* 清除顶部边框颜色 */
+        }
+
+        .contact-method:hover .qr-popup {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* 调整复制提示的位置 */
+        .copy-success {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(76, 175, 80, 0.95);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            z-index: 100;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .contact-cards {
+                gap: 24px;
+            }
+            
+            .contact-card {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .contact-card-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        /* 新的联系方式容器样式 */
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+
+        .contact-method {
+            position: relative;
+            width: 56px;
+            height: 56px;
+            background: white;
+            border: 1px solid rgba(56, 124, 232, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            background: var(--accent-color);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .contact-method img {
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover img {
+            filter: brightness(0) invert(1);
+            transform: scale(1.1);
+        }
+
+        .method-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            color: #666;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .contact-method.copied .method-tooltip {
+            color: #4CAF50;
+        }
+
+        @media (max-width: 480px) {
+            .contact-methods {
+                gap: 16px;
+            }
+
+            .contact-method {
+                width: 48px;
+                height: 48px;
+            }
+
+            .contact-method img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* 添加二维码悬浮窗样式 */
+        .qr-popup {
+            position: absolute;
+            top: calc(100% + 16px); /* 改为从上方计算位置 */
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .qr-popup img {
+            width: 120px;
+            height: 120px;
+            display: block;
+        }
+
+        .qr-popup::after {
+            content: '';
+            position: absolute;
+            bottom: 100%; /* 改为从底部指向上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-bottom-color: white; /* 改为底部边框颜色 */
+            border-top-color: transparent; /* 清除顶部边框颜色 */
+        }
+
+        .contact-method:hover .qr-popup {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* 更新微信图标的悬浮效果，确保二维码显示时图标也有反馈 */
+        .contact-method.wechat:hover {
+            background: var(--accent-color);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .contact-method.wechat:hover img {
+            filter: brightness(0) invert(1);
+        }
+
+        /* 更新微信按钮特定样式 */
+        .contact-method.wechat {
+            cursor: default;
+        }
+
+        .qr-popup {
+            position: absolute;
+            top: calc(100% + 16px); /* 改为从上方计算位置 */
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+            z-index: 100;
+            border: 1px solid rgba(56, 124, 232, 0.1);
+            pointer-events: auto;
+        }
+
+        .contact-method:hover .qr-popup {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%);
+            transition-delay: 0s;
+        }
+
+        .qr-popup:hover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%);
+        }
+
+        /* 修复二维码弹窗样式 */
+        .qr-popup {
+            position: absolute;
+            top: calc(100% + 16px); /* 改为从上方计算位置 */
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease;
+            z-index: 100;
+            border: 1px solid rgba(56, 124, 232, 0.1);
+            pointer-events: none;
+        }
+
+        .qr-popup img {
+            display: block;
+            width: 160px;
+            height: 160px;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .contact-method.wechat:hover .qr-popup {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .qr-popup {
+            position: absolute;
+            top: calc(100% + 16px); /* 改为从上方计算位置 */
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: 1px solid rgba(56, 124, 232, 0.1);
+        }
+
+        .qr-popup object {
+            display: block;
+            border-radius: 10px;
+        }
+
+        .contact-method.wechat:hover .qr-popup {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 添加 QQ 的悬浮效果 */
+        .contact-method.qq:hover {
+            background: var(--accent-color);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .contact-method.qq:hover img {
+            filter: brightness(0) invert(1);
+        }
+
+        /* 移除QQ的复制功能 */
+        .contact-method.qq {
+            cursor: default;
+        }
+
+        /* 添加复制成功提示的样式 */
+        .copy-success {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .contact-method.copied .copy-success {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .contact-method {
+            cursor: pointer;
+        }
+
+        .contact-method:not(.wechat):hover .method-tooltip {
+            opacity: 1;
+        }
     </style>
+
+    <!-- 在head中预加载二维码图片 -->
+    <link rel="preload" as="image" href="../assets/svg/contact/wxtj.svg">
 </head>
 <body>
     <!-- 导航菜单 -->
@@ -577,22 +1003,62 @@
     <!-- 主要内容区域 -->
     <main class="content-container">
         <div class="contact-form-container">
-            <h1>联系我</h1>
-            
-            <!-- 社交媒体图标保持不变 -->
-            <div class="social-links">
-                <!-- ...existing social links... -->
+            <h1>
+                <img src="../assets/svg/contact/Contact Me.svg" alt="Contact Me" class="contact-title">
+            </h1>
+
+            <!-- 移动联系方式到这里 -->
+            <div class="contact-methods">
+                <div class="contact-method wechat">
+                    <img src="../assets/svg/contact/wechat.svg" alt="WeChat">
+                    <span class="method-tooltip">扫码添加微信</span>
+                    <div class="qr-popup">
+                        <object data="../assets/svg/contact/wxtj.svg" 
+                                type="image/svg+xml" 
+                                width="160" 
+                                height="160"
+                                style="background: white;">
+                            <img src="../assets/svg/contact/wxtj.svg" alt="微信二维码" width="160" height="160">
+                        </object>
+                    </div>
+                </div>
+
+                <div class="contact-method qq">
+                    <img src="../assets/svg/contact/qq.svg" alt="QQ">
+                    <span class="method-tooltip"> </span>
+                    <div class="qr-popup">
+                        <object data="../assets/svg/contact/qqtj.svg"
+                                type="image/svg+xml"
+                                width="160" 
+                                height="160"
+                                style="background: white;">
+                            <img src="../assets/svg/contact/qqtj.svg" alt="QQ二维码" width="160" height="160">
+                        </object>
+                    </div>
+                </div>
+
+                <div class="contact-method" data-copy="13147063894" onclick="copyToClipboard(this)">
+                    <img src="../assets/svg/contact/phone.svg" alt="Phone">
+                    <span class="method-tooltip" data-text="手机号码">手机号码</span>
+                    <div class="copy-success">已复制到剪贴板!</div>
+                </div>
+
+                <div class="contact-method" data-copy="2216921192@qq.com" onclick="copyToClipboard(this)">
+                    <img src="../assets/svg/contact/email.svg" alt="Email">
+                    <span class="method-tooltip" data-text="邮箱地址">邮箱地址</span>
+                    <div class="copy-success">已复制到剪贴板!</div>
+                </div>
             </div>
 
             <!-- 简单的联系表单 -->
-            <form action="https://formsubmit.co/2216921192@qq.com" method="POST" enctype="multipart/form-data">
-                <!-- FormSubmit 配置 -->
+            <form id="contactForm" action="https://formsubmit.co/2216921192@qq.com" method="POST">
+                <!-- FormSubmit配置 -->
                 <input type="hidden" name="_subject" value="来自个人网站的新消息">
                 <input type="hidden" name="_next" value="https://norlin-22.github.io/sssss-01/pages/thanks.html">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_autoresponse" value="感谢您的留言，我会尽快回复您。">
-                
+                <input type="hidden" name="_autoresponse" value="感谢您的留言,我会尽快回复您。">
+
                 <!-- 表单字段 -->
                 <div class="form-group">
                     <label for="name">您的姓名</label>
@@ -609,76 +1075,21 @@
                     <textarea name="message" id="message" rows="6" required></textarea>
                 </div>
 
-                <!-- 添加文件上传部分 -->
-                <div class="form-group">
-                    <label>附件（可选）</label>
-                    <div class="file-upload">
-                        <input type="file" id="attachment" name="attachment" class="file-input" multiple>
-                        <label for="attachment" class="file-label">
-                            <span class="file-text">点击或拖拽文件到这里</span>
-                            <span class="file-info">支持多个文件，单个文件最大 10MB</span>
-                        </label>
-                        <div class="selected-files"></div>
-                    </div>
-                </div>
-
-                <!-- 可选：将表单提交后跳转到感谢页面 -->
-                <input type="hidden" name="redirect" value="https://norlin-22.github.io/sssss-01/pages/thanks.html">
-                
                 <button type="submit" class="submit-btn">
                     <span class="btn-text">发送消息</span>
                     <div class="loading-spinner"></div>
                 </button>
             </form>
-
-            <!-- 联系卡片部分保持不变 -->
-            <div class="contact-cards">
-                <div class="contact-card" onclick="copyToClipboard('norlin2216')">
-                    <img src="../assets/svg/wechat.svg" alt="WeChat" class="contact-card-icon">
-                    <div class="contact-card-info">
-                        <h3>微信</h3>
-                        <p>norlin2216</p>
-                    </div>
-                    <span class="copy-hint">点击复制</span>
-                </div>
-
-                <div class="contact-card" onclick="copyToClipboard('2216921192')">
-                    <img src="../assets/svg/qq.svg" alt="QQ" class="contact-card-icon">
-                    <div class="contact-card-info">
-                        <h3>QQ</h3>
-                        <p>2216921192</p>
-                    </div>
-                    <span class="copy-hint">点击复制</span>
-                </div>
-
-                <div class="contact-card" onclick="copyToClipboard('13147063894')">
-                    <img src="../assets/svg/phone.svg" alt="Phone" class="contact-card-icon">
-                    <div class="contact-card-info">
-                        <h3>手机</h3>
-                        <p>131-4706-3894</p>
-                    </div>
-                    <span class="copy-hint">点击复制</span>
-                </div>
-
-                <div class="contact-card" onclick="copyToClipboard('2216921192@qq.com')">
-                    <img src="../assets/svg/email.svg" alt="Email" class="contact-card-icon">
-                    <div class="contact-card-info">
-                        <h3>邮箱</h3>
-                        <p>2216921192@qq.com</p>
-                    </div>
-                    <span class="copy-hint">点击复制</span>
-                </div>
-            </div>
         </div>
     </main>
 
     <!-- 添加提示框 HTML -->
     <div class="toast success" id="successToast">
-        <img src="../assets/svg/check-circle.svg" alt="Success" class="toast-icon">
+        <img src="../assets/svg/contact/check-circle.svg" alt="Success" class="toast-icon">
         <span>消息发送成功！</span>
     </div>
     <div class="toast error" id="errorToast">
-        <img src="../assets/svg/alert-circle.svg" alt="Error" class="toast-icon">
+        <img src="../assets/svg/contact/alert-circle.svg" alt="Error" class="toast-icon">
         <div class="toast-content">
             <h3 class="toast-title">发送失败</h3>
             <p class="toast-message">抱歉，消息发送失败。您可以：</p>
@@ -721,7 +1132,7 @@
             e.preventDefault();
             
             const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
+            const email = document.get.getElementById('email').value;
             const message = document.getElementById('message').value;
             
             const mailtoLink = `mailto:2216921192@qq.com?subject=来自${name}的留言&body=发件人邮箱: ${email}%0A%0A${message}`;
@@ -734,7 +1145,7 @@
             button.addEventListener('click', () => {
                 // 移除所有活动状态
                 document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-                document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+                document.querySelectorAll('..tab-panel').forEach(panel => panel.classList.remove('active'));
                 
                 // 添加新的活动状态
                 button.classList.add('active');
@@ -743,49 +1154,20 @@
         });
 
         // 删除之前所有的表单提交事件监听器，只保留这一个
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const form = e.target;
-            const submitBtn = form.querySelector('.submit-btn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const spinner = submitBtn.querySelector('.loading-spinner');
-            
-            // 显示加载状态
-            btnText.style.display = 'none';
-            spinner.style.display = 'inline-block';
-            submitBtn.disabled = true;
-
-            try {
-                // 创建不包含文件的表单数据
-                const formData = new FormData();
-                formData.append('access_key', form.querySelector('[name="access_key"]').value);
-                formData.append('from_name', form.querySelector('[name="from_name"]').value);
-                formData.append('subject', form.querySelector('[name="subject"]').value);
-                formData.append('replyto', form.querySelector('[name="email"]').value);
-                formData.append('name', form.querySelector('[name="name"]').value);
-                formData.append('email', form.querySelector('[name="email"]').value);
-                formData.append('message', form.querySelector('[name="message"]').value);
-
-                const response = await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    body: formData
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    // 让表单正常提交到FormSubmit
+                    const submitBtn = form.querySelector('.submit-btn');
+                    const btnText = submitBtn.querySelector('.btn-text');
+                    const spinner = submitBtn.querySelector('.loading-spinner');
+                    
+                    // 显示加载状态
+                    btnText.style.display = 'none';
+                    spinner.style.display = 'inline-block';
+                    submitBtn.disabled = true;
                 });
-
-                const result = await response.json();
-                
-                if (result.success) {
-                    window.location.href = './thanks.html';
-                } else {
-                    throw new Error(result.message || '发送失败');
-                }
-            } catch (error) {
-                console.error('发送失败:', error);
-                showToast('error');
-            } finally {
-                // 恢复按钮状态
-                btnText.style.display = 'inline-block';
-                spinner.style.display = 'none';
-                submitBtn.disabled = false;
             }
         });
 
@@ -798,12 +1180,78 @@
             }, 3000);
         }
 
-        // 添加复制功能
-        function copyToClipboard(text) {
+        // 更新复制功能，为微信添加特殊处理
+        document.querySelectorAll('.contact-method').forEach(method => {
+            if (method.classList.contains('wechat')) {
+                // 为微信按钮添加双击复制功能
+                method.addEventListener('dblclick', () => {
+                    copyToClipboard(method, 'norlin2216');
+                });
+            } else {
+                // 其他按钮保持单击复制
+                method.addEventListener('click', function() {
+                    const text = this.getAttribute('data-copy');
+                    copyToClipboard(this, text);
+                });
+            }
+        });
+
+        // 更新复制功能
+        function copyToClipboard(element, text) {
             navigator.clipboard.writeText(text).then(() => {
-                showToast('success');
+                element.classList.add('copied');
+                const tooltip = element.querySelector('.method-tooltip');
+                tooltip.textContent = '已复制!';
+                
+                setTimeout(() => {
+                    element.classList.remove('copied');
+                    tooltip.textContent = tooltip.getAttribute('data-text');
+                }, 1500);
             }).catch(() => {
                 showToast('error');
+            });
+        }
+
+        // 更新事件处理逻辑
+        document.querySelectorAll('.contact-method:not(.wechat)').forEach(method => {
+            method.addEventListener('click', function() {
+                const text = this.dataset.copy;
+                if (text) {
+                    copyToClipboard(this, text);
+                }
+            });
+        });
+
+        // 更新事件处理逻辑，移除QQ的点击复制功能
+        document.querySelectorAll('.contact-method').forEach(method => {
+            if (method.classList.contains('wechat') || method.classList.contains('qq')) {
+                // 微信和QQ按钮添加双击复制功能
+                method.addEventListener('dblclick', () => {
+                    const text = method.classList.contains('wechat') ? 'norlin2216' : '2216921192';
+                    copyToClipboard(method, text);
+                });
+            } else {
+                // 其他按钮保持单击复制
+                method.addEventListener('click', function() {
+                    const text = this.getAttribute('data-copy');
+                    copyToClipboard(this, text);
+                });
+            }
+        });
+
+        function copyToClipboard(element) {
+            const textToCopy = element.getAttribute('data-copy');
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // 添加复制成功的类
+                element.classList.add('copied');
+                
+                // 3秒后移除复制成功的类
+                setTimeout(() => {
+                    element.classList.remove('copied');
+                }, 3000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
             });
         }
     </script>
