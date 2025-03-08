@@ -55,10 +55,11 @@
     --text-margin: 400px;         /* 文本外边距 */
     
     /* 字体设置 - 网站使用的字体族和大小 */
-    --font-primary: 'Noto Sans TC', sans-serif;  /* 主要字体 */
+    --font-primary: 'HONOR Sans CN', -apple-system, BlinkMacSystemFont, sans-serif;  /* 主要字体 */
     --font-display: 'Zen Dots', cursive;        /* 展示用字体 */
-    --font-nav: 'Noto Sans TC', sans-serif;     /* 导航字体 */
+    --font-nav: 'HONOR Sans CN', -apple-system, BlinkMacSystemFont, sans-serif;     /* 导航字体 */
     --font-size-base: 16px;                     /* 基础字体大小 */
+    --font-title: 'Zen Dots', cursive; /* 只用于首页主标题 */
     
     /* 动画时间 - 过渡效果的持续时间 */
     --transition-fast: 0.1s;      /* 快速过渡 */ 
@@ -103,6 +104,7 @@ body {
         border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: background-color, box-shadow, border-color, opacity; /* 优化性能 */
     opacity: 0.98;           /* 轻微透明效果 */
+    font-family: var(--font-nav);
 }
 
 /* 导航菜单在白色区域的样式 
@@ -470,6 +472,11 @@ body {
     font-weight: 300;       /* 细体 */
     color: var(--text-color);
     opacity: 1;
+}
+
+/* 保持首页主标题字体 */
+.hero-title {
+    font-family: var(--font-title);
 }
 
 /*---------------*\
