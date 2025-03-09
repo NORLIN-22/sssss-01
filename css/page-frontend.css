@@ -1,0 +1,261 @@
+/* 页面基础样式 */
+body {
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    font-family: var(--font-primary);
+    margin: 0; /* 移除 body 默认 margin */
+    padding: 0; /* 移除 body 默认 padding */
+    overflow-x: hidden; /* 防止水平滚动条 */
+}
+
+/* 导航栏样式 */
+.nav-menu {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 10px rgba(49, 139, 224, 0.336);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-menu .nav-item {
+    color: var(--secondary-color) !important;
+}
+
+.nav-logo img {
+    filter: invert(45%) sepia(92%) saturate(1864%) hue-rotate(202deg) brightness(98%) contrast(93%);
+}
+
+/* 作品集链接悬浮效果 */
+.portfolio-link.nav-item:hover {
+    background: transparent;
+    color: #387ce8 !important;
+    transform: none;
+}
+
+/* 内容区域样式 */
+.content-container {
+    width: 100%;
+    margin: 0;
+    padding-top: var(--nav-height); /* 只保留顶部导航栏间距 */
+    min-height: 100vh; /* 允许内容超出底部 */
+    position: relative; /* 添加相对定位 */
+    overflow: visible; /* 允许内容超出底部 */
+}
+
+/* 图片容器样式 */
+.image-container {
+    width: 100vw;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    max-height: calc(100vh - var(--nav-height)); /* 限制最大高度 */
+    justify-content: center;
+    align-items: flex-start; /* 顶部对齐 */
+    margin: 0; /* 移除外边距 */
+    padding: 0; /* 移除内边距 */
+}
+
+/* 类似首页头图的图片区域 */
+.hero-image-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: calc(130vh - var(--nav-height));
+    overflow: hidden;
+}
+
+.hero-image {
+    width: var(--hero-width);
+    height: var(--hero-height);
+    display: block;
+    object-fit: var(--hero-object-fit);
+}
+
+/* 下拉菜单样式 */
+.dropdown-content {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.dropdown-item {
+    color: var(--secondary-color) !important;
+    font-weight: 300;
+}
+
+.dropdown-item:hover {
+    background: transparent;
+    color: #387ce8 !important;
+}
+
+/* 项目网格布局 */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 0; /* 移除间距 */
+    padding: 0; /* 移除内边距 */
+}
+
+/* 项目卡片样式 */
+.project-item {
+    background: white;
+    border-radius: 0; /* 移除圆角 */
+    overflow: hidden;
+    box-shadow: none; /* 移除阴影 */
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+}
+
+/* 项目图片样式 */
+.project-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain; /* 确保图片比例不变形 */
+    margin: 0; /* 移除外边距 */
+    padding: 0; /* 移除内边距 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .project-image {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* 修复Safari特定问题 */
+@supports (-webkit-touch-callout: none) {
+    .content-container {
+        width: 100vw;
+        margin: 0;
+        padding: var(--nav-height) 0 0 0;
+        overflow: visible;
+    }
+}
+
+/* 控制器 */
+:root {
+    --hero-width: 100%;
+    --hero-height: auto;
+    --hero-object-fit: contain;
+    --svg-width: 300px;
+    --svg-margin-top: 20px;
+    --svg-left: 50%;
+}
+
+/* 新增图片样式 */
+.bottom-image {
+    width: 1300px;
+    height: auto;
+    display: block;
+    margin-top: 150px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 新增图片样式 */
+.bottom-image-2 {
+    width: 1300px;
+    height: auto;
+    display: block;
+    margin-top: 300px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+/* SVG 样式 */
+.bottom-svg {
+    width: var(--svg-width);
+    height: auto;
+    position: relative;
+    margin-top: 230px;
+    left: 20%;
+    transform: translateX(-50%);
+    display: block;
+    padding: 10px;
+}
+
+/* 新增SVG样式 */
+.bottom-svg-2 {
+    width: var(--svg-width); /* 继承svg-width */
+    height: auto;
+    position: relative;
+    margin-top: 400px;
+    left: 20%;
+    transform: translateX(-50%);
+    display: block;
+    padding: 10px;
+}
+
+/* 视频样式 */
+.bottom-video {
+    width: 45%;
+    margin-top: 140px;
+    position: relative;
+    left: var(--video-left, 50%);
+    transform: translateX(-70%);
+    display: block;
+    border-radius: 15px;
+}
+
+/* 新增SVG样式 - 不准修改这里的内容*/
+.video-svg {
+    width: 250px;
+    height: auto;
+    position: relative;
+    top: -320px; /* 与视频顶部对齐 */
+    left: 60%; /* 水平居中 */
+    transform: translateX(100%); /* 向右移动自身宽度的一半 */
+}
+
+/* 视频位置控制器 */
+:root {
+    --video-left: 50%; /* 控制视频位置：
+                          50% = 居中
+                          20% = 偏左
+                          80% = 偏右
+                       */
+}
+
+/* 底部图片样式 */
+.final-image {
+    width: 100%;
+    display: block;
+    margin-top: 100px; /* 调整顶部间距 */
+    position: relative; /* 相对定位，用于定位SVG */
+    left: var(--final-image-left, 50%); /* 添加位置控制变量 */
+    transform: translateX(calc(-1 * var(--final-image-offset, 50%))); /* 添加偏移控制 */
+}
+
+/* 底部图片内的SVG样式 */
+.final-image-svg {
+    width: 360px; /* 初始宽度 */
+    height: auto;
+    position: absolute;
+    bottom: 600px; /* 距离底部20px */
+    right: 1200px; /* 距离右侧20px */
+    pointer-events: none; /* 阻止SVG捕获点击事件 */
+	display: block;
+}
+
+/* 底部图片位置控制器 */
+:root {
+    --final-image-left: 50%; /* 控制图片水平位置 */
+    --final-image-offset: 50%; /* 控制偏移量：
+                                 50% = 居中
+                                 0% = 靠左
+                                 100% = 靠右
+                              */
+}

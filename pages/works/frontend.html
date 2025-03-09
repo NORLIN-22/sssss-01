@@ -8,62 +8,8 @@
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="../../css/animations.css">
     <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/page-frontend.css">
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-    <style>
-        /* 项目页面特定样式 */
-        body {
-            background-color: var(--bg-color);
-            min-height: 100vh;
-        }
-
-        .nav-menu {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 10px rgba(49, 139, 224, 0.336);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .nav-menu .nav-item {
-            color: var(--secondary-color) !important;
-        }
-
-        .nav-logo img {
-            filter: invert(45%) sepia(92%) saturate(1864%) hue-rotate(202deg) brightness(98%) contrast(93%);
-        }
-
-        /* 作品集链接悬浮效果 */
-        .portfolio-link.nav-item:hover {
-            background: transparent;
-            color: #387ce8 !important;
-            transform: none;
-        }
-
-        /* 内容区域样式 */
-        .content-container {
-            max-width: var(--content-width);
-            margin: 0 auto;
-            padding: calc(var(--nav-height) + 40px) 20px 60px;
-        }
-
-        /* 下拉菜单样式继承自主页白色区域样式 */
-        .dropdown-content {
-            background: rgba(255, 255, 255, 0.98);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-        }
-
-        .dropdown-item {
-            color: var(--secondary-color) !important;
-            font-weight: 300;
-        }
-
-        .dropdown-item:hover {
-            background: transparent;
-            color: #387ce8 !important;
-        }
-    </style>
 </head>
 <body>
     <!-- 导航菜单 -->
@@ -95,8 +41,38 @@
 
     <!-- 主要内容区域 -->
     <main class="content-container">
-        <!-- 这里放置具体项目内容 -->
+        <div class="hero-image-container">
+            <img src="../../assets/png/front end/1.png" alt="Frontend Project 1" class="hero-image">
+        </div>
+        <object class="bottom-svg" data="../../assets/svg/front end/3.svg" type="image/svg+xml"></object>
+        <img class="bottom-image" src="../../assets/png/front end/4.png" alt="Bottom Image">
+        <img class="bottom-image-2" src="../../assets/png/front end/5.png" alt="Bottom Image 2">
+        <object class="bottom-svg-2" data="../../assets/svg/front end/6.svg" type="image/svg+xml"></object>
+        <div style="position: relative;">
+            <video class="bottom-video" controls>
+                <source src="../../assets/video/sketch_drawing.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <object class="video-svg" data="../../assets/svg/front end/7.svg" type="image/svg+xml"></object>
+        </div>
+        <div style="position: relative;">
+            <img class="final-image" src="../../assets/png/front end/2.png" alt="Final Image">
+            <object class="final-image-svg" data="../../assets/svg/front end/8.svg" type="image/svg+xml"></object>
+            <a href="https://github.com/NORLIN-22/SketchDrawingApp/releases/download/v1.0/sketch_drawing.zip" 
+               target="_blank" 
+               rel="noopener" 
+               style="position: absolute; 
+                      right: 1200px; 
+                      bottom: 600px; 
+                      width: 360px; 
+                      height: 100px; 
+                      z-index: 10;">
+                <!-- 创建透明的点击区域 -->
+                <div style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></div>
+            </a>
+        </div>
     </main>
+    
 </body>
 </html>
 
