@@ -1,0 +1,688 @@
+/* 插画页面基础样式 */
+body {
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* 导航栏样式 */
+.nav-menu {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 10px rgba(49, 139, 224, 0.336);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-menu .nav-item {
+    color: var(--secondary-color) !important;
+}
+
+.nav-logo img {
+    filter: invert(45%) sepia(92%) saturate(1864%) hue-rotate(202deg) brightness(98%) contrast(93%);
+}
+
+/* 作品集链接悬浮效果 */
+.portfolio-link.nav-item:hover {
+    background: transparent;
+    color: #387ce8 !important;
+    transform: none;
+}
+
+/* 内容区域样式 - 仅保留基本容器 */
+.content-container {
+    width: 100%;
+    margin: 0;
+    padding-top: 0; /* 移除顶部内边距，由hero-section的margin-top来控制与导航栏的间距 */
+    min-height: 100vh;
+    position: relative;
+    overflow: visible;
+}
+
+/* 下拉菜单样式 */
+.dropdown-content {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.dropdown-item {
+    color: var(--secondary-color) !important;
+    font-weight: 300;
+}
+
+.dropdown-item:hover {
+    background: transparent;
+    color: #387ce8 !important;
+}
+
+/* 插画作品展示区域 */
+.illustration-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.illustration-item {
+    overflow: hidden;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.illustration-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.illustration-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.illustration-item:hover .illustration-image {
+    transform: scale(1.03);
+}
+
+/* 标题区域 */
+.page-title {
+    text-align: center;
+    padding: 60px 20px 20px;
+}
+
+.title-svg {
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+/* 作品详情浮层 */
+.illustration-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 15px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.illustration-item:hover .illustration-overlay {
+    transform: translateY(0);
+}
+
+.illustration-title {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.illustration-desc {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 过滤器区域 */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.filter-button {
+    padding: 8px 18px;
+    background: rgba(56, 124, 232, 0.08);
+    border: none;
+    border-radius: 30px;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-button.active,
+.filter-button:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+/* 动画效果 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .illustration-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        padding: 20px;
+        gap: 16px;
+    }
+    
+    .page-title {
+        padding: 40px 20px 10px;
+    }
+    
+    .title-svg {
+        max-width: 220px;
+    }
+}
+
+/* 灯箱效果的样式 */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.lightbox-info {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+}
+
+/* 添加首页头图样式 */
+.hero-section {
+    width: 100%;
+    height: 60vh; /* 设置为视口高度的60% */
+    position: relative;
+    overflow: hidden;
+    margin-top: var(--nav-height); /* 添加顶部边距等于导航栏高度 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 确保图片覆盖整个区域且不变形 */
+    display: block;
+}
+
+/* 标题图片样式 */
+.title-image {
+    position: absolute;
+    width: 860px; /* 使用变量控制宽度 */
+    height: auto;
+    z-index: 2;
+    transform: translate(var(--title-offset-x, 0), var(--title-offset-y, 0)) scale(var(--title-scale, 1)); /* 添加缩放控制 */
+    transition: transform 0.3s ease; /* 平滑过渡效果 */
+    transform-origin: center center; /* 从中心点缩放 */
+}
+
+/* 控制器 - 标题图片大小和位置 */
+:root {
+    --title-width: 400px; /* 标题图片宽度 */
+    --title-offset-x: 0px; /* 水平位置偏移量 */
+    --title-offset-y: 0px; /* 垂直位置偏移量 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    :root {
+        --title-width: 280px; /* 移动端标题图片宽度 */
+    }
+}
+
+/* 添加项目区域样式 */
+.project-section {
+    width: calc(var(--project-svg-width) * var(--project-svg-scale)); /* 使用变量控制宽度 */
+    position: absolute;
+    left: 50%; /* 居中定位 */
+    transform: translateX(calc(-50% + var(--project-offset))); /* 水平居中后偏移以实现左对齐 */
+    top: 690px; /* 调整顶部位置 */
+    z-index: 2;
+    margin: 0 auto; /* 确保水平居中 */
+}
+
+:root {
+    --project-width: 16%;
+    --project-height: auto;
+    --project-padding-x: 0;
+    --project-padding-y: 50px;
+    --project-svg-width: 220px; /* 控制 xianmu.svg 的宽度 */
+    --project-svg-scale: 1; /* 控制 xianmu.svg 的缩放比例 */
+    --project-left-offset: 0px; /* 控制相对于artwork-section左边缘的偏移量，正值向右偏移 */
+    --project-offset: calc(-1 * var(--artwork-width) / 2 + 20px); /* 设置偏移量，使其与 artwork-section 左边缘对齐并略微内缩 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .project-svg {
+        width: 90%;
+    }
+}
+
+/* 添加新的作品展示区域样式 - 确保与标题图片一样居中 */
+.artwork-section {
+    width: 100%;
+    max-width: var(--artwork-width);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 180px;
+    gap: calc(var(--artwork-gap)* var(--artwork-scale));
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    transform: scale(var(--artwork-container-scale));
+    transform-origin: center center;
+}
+
+/* 调整图片尺寸，使用相对于容器的百分比宽度 */
+.artwork-image {
+    width: calc(var(--artwork-image-width) * var(--artwork-scale-inner)); /* 使用变量控制图片宽度 */
+    height: auto; /* 高度根据宽度自动调整，保持比例 */
+    max-height: calc(400px * var(--artwork-scale-inner, 1)); /* 根据缩放比例调整高度 */
+    object-fit: contain;
+    display: block;
+    border-radius: 2px;
+    box-shadow: 0 5px 15px rgba(110, 190, 255, 0.1);
+    flex-shrink: 0;
+    align-self: center;
+    max-width: 30%; /* 限制在小屏幕上的最大宽度 */
+}
+
+/* SVG容器 - 用于包含SVG和按钮 - 减小高度并调整内部元素间距 */
+.artwork-svg-container {
+    display: flex;
+    flex-direction: column; /* SVG和按钮垂直排列 */
+    align-items: flex-start; /* 保持SVG和按钮在容器内左对齐 */
+    gap: calc(15px * var(--artwork-scale-inner, 1)); /* 根据缩放比例调整间距 */
+    flex: 0 0 auto; /* 不再让元素伸展占满空间 */
+    height: calc(380px * var(--artwork-scale-inner, 1)); /* 根据缩放比例调整高度 */
+    justify-content: center; /* 确保垂直居中 */
+    max-width: 500px; /* 设置最大宽度，确保在大屏幕上不会过宽 */
+    width: calc(var(--artwork-svg-width) * var(--artwork-scale-inner)); /* 使用变量控制SVG容器宽度 */
+}
+
+.artwork-svg {
+    width: 100%; /* 容器内占满宽度 */
+    max-width: 100%; /* 确保不超出容器宽度 */
+    height: auto;
+    display: block;
+    flex: 0 0 auto; /* 不再让元素伸展占满空间 */
+    max-height: calc(280px * var(--artwork-scale-inner, 1)); /* 根据缩放比例调整高度 */
+    object-fit: contain; /* 保持SVG比例 */
+    margin: 0; /* 移除自动边距，不再居中 */
+}
+
+/* 哔哩哔哩按钮样式 */
+.bilibili-link {
+    display: block;
+    margin-top: calc(50px * var(--artwork-scale-inner, 1)); /* 根据缩放比例调整间距 */
+    transition: transform 0.3s ease;
+    width: calc(200px * var(--artwork-scale-inner, 1)); /* 根据缩放比例调整宽度 */
+    align-self: flex-start; /* 改为左对齐 */
+    margin-left: 0; /* 移除左侧自动边距 */
+    margin-right: 0; /* 移除右侧自动边距 */
+}
+
+.bilibili-button {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)); /* 添加阴影效果 */
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* 悬浮效果 */
+.bilibili-link:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.bilibili-link:hover .bilibili-button {
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+}
+
+/* 点击效果 */
+.bilibili-link:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .artwork-section {
+        flex-direction: column; /* 小屏幕上改为垂直排列 */
+        margin-top: 300px;
+        padding-left: 20px; /* 移动端使用固定内边距 */
+        padding-right: 20px;
+        justify-content: center; /* 移动端居中对齐 */
+    }
+    
+    .artwork-image {
+        max-width: 80%; /* 调整移动端图片宽度 */
+        max-height: 300px; /* 调整移动端图片高度 */
+    }
+    
+    .artwork-svg-container {
+        width: 90%;
+        align-items: center; /* 在移动端居中对齐 */
+        height: auto; /* 在移动端取消固定高度 */
+    }
+    
+    .bilibili-link {
+        align-self: center; /* 在移动端居中对齐 */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+:root {
+    --artwork-scale: 1; /* 控制artwork-section整体缩放比例，1为原始大小 */
+    --artwork-scale-inner: 1; /* 控制artwork-section内部元素的缩放比例 */
+    --artwork-width: 910px; /* 添加新的变量专门控制artwork-section宽度 */
+    --image-left-margin: 20px; /* 重置左侧边距为标准值 */
+    --image-right-margin: 20px;
+    --artwork-gap: 50px; /* 元素间距 */
+    --artwork-image-width: 300px; /* 图片宽度 */
+    --artwork-svg-width: 500px; /* SVG容器宽度 */
+    --artwork-container-scale: 1.1; /* 添加控制整体容器大小的变量，1为原始大小，小于1缩小，大于1放大 */
+}
+
+/* 添加流程图部分的样式 */
+.flow-chart-section {
+    width: 100%;
+    max-width: var(--flow-chart-width, 1100px); /* 控制流程图宽度 */
+    margin: calc(var(--flow-chart-margin-top, 100px)) auto 0;
+    padding: 0 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.flow-chart-svg {
+    width: 100%;
+    height: auto;
+    max-height: calc(var(--flow-chart-max-height, 600px) * var(--flow-chart-scale, 1)); /* 控制最大高度 */
+    display: block;
+    object-fit: contain;
+    transform: scale(var(--flow-chart-scale, 1)); /* 添加缩放控制 */
+    transform-origin: center top;
+}
+
+/* 流程图的响应式调整 */
+@media (max-width: 768px) {
+    :root {
+        /* ...existing variables... */
+        --flow-chart-width: 100%; /* 移动端宽度占满容器 */
+        --flow-chart-margin-top: 60px; /* 减小顶部间距 */
+        --flow-chart-scale: 0.85; /* 移动端缩小尺寸 */
+    }
+}
+
+:root {
+    /* ...existing variables... */
+    --flow-chart-width: 1100px; /* 流程图宽度 */
+    --flow-chart-margin-top: 160px; /* 与上方元素的间距 */
+    --flow-chart-max-height: 600px; /* 最大高度 */
+    --flow-chart-scale: 1; /* 缩放比例 */
+}
+
+/* 添加完成图部分的样式 */
+.completion-section {
+    width: 100%;
+    max-width: var(--completion-width, 1100px);
+    margin: calc(var(--completion-margin-top, 100px)) auto 0;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.completion-image {
+    width: 100%;
+    height: auto;
+    max-height: calc(var(--completion-max-height, 800px) * var(--completion-scale, 1));
+    display: block;
+    object-fit: contain;
+    border-radius: var(--completion-border-radius, 12px); /* 改为12px的圆角 */
+    box-shadow: var(--completion-shadow, 0 8px 30px rgba(0, 0, 0, 0.15)); /* 添加阴影 */
+    cursor: pointer; /* 指针样式，提示可点击 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加平滑过渡效果 */
+}
+
+/* 鼠标悬停效果 */
+.completion-image:hover {
+    transform: translateY(-5px); /* 轻微上浮效果 */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); /* 悬停时阴影更强 */
+}
+
+/* 图片详情浏览模式 */
+.fullscreen-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.fullscreen-viewer.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.fullscreen-image {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.close-viewer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+}
+
+.close-viewer:hover {
+    color: #ddd;
+}
+
+/* 完成图的响应式调整 */
+@media (max-width: 768px) {
+    :root {
+        /* ...existing variables... */
+        --completion-width: 100%;
+        --completion-margin-top: 60px;
+        --completion-scale: 0.95;
+    }
+}
+
+:root {
+    /* ...existing variables... */
+    --completion-width: 1100px;
+    --completion-margin-top: 200px;
+    --completion-max-height: 800px;
+    --completion-scale: 1;
+    --completion-border-radius: 12px; /* 修改默认值为12px */
+    --completion-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* 添加默认阴影 */
+}
+
+@media (max-width: 768px) {
+    :root {
+        --artwork-scale: 0.9; /* 移动端缩小整体比例 */
+        --artwork-scale-inner: 0.9; /* 移动端缩小内部元素比例 */
+        --artwork-width: 95%; /* 移动端使用百分比宽度 */
+        --image-left-margin: 20px; /* 移动端减小左边距 */
+        --image-right-margin: 20px;
+        --artwork-gap: 30px; /* 移动端减少间距 */
+        --artwork-container-scale: 0.7; /* 移动端进一步缩小 */
+        --project-left-offset: 10px; /* 在移动端上增加一点偏移量 */
+        --project-offset: calc(-45% + 20px); /* 移动端上调整偏移量 */
+    }
+    
+    .project-section {
+        left: 10px; /* 移动端上单独设置左侧位置 */
+    }
+    
+    .artwork-section {
+        justify-content: center; /* 在移动端保持居中对齐 */
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* 添加媒体组合区域样式 */
+.media-section {
+    width: 100%;
+    margin: calc(var(--media-margin-top, 120px)) auto 60px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.media-container {
+    width: 100%;
+    max-width: var(--media-container-width, 1100px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--media-gap, 40px);
+    justify-content: center;
+}
+
+/* 原片SVG样式 */
+.yuanpian-svg {
+    width: 90%;
+    max-width: var(--yuanpian-width, 400px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 视频样式 */
+.process-video {
+    width: 100%;
+    max-width: var(--video-width, 880px);
+    height: auto;
+    border-radius: var(--video-border-radius, 8px);
+    box-shadow: var(--video-shadow, 0 8px 30px rgba(0, 0, 0, 0.15));
+    display: block;
+    margin: 0 auto;
+    background-color: #000; /* 视频加载时的背景色 */
+}
+
+/* 添加变量控制 */
+:root {
+    /* ...existing variables... */
+    --media-margin-top: 170px; /* 与上方元素的间距 */
+    --media-container-width: 1100px; /* 容器宽度 */
+    --media-gap: 40px; /* SVG和视频之间的间距 */
+    --yuanpian-width: 400px; /* SVG宽度 */
+    --video-width: 600px; /* 视频宽度 */
+    --video-border-radius: 8px; /* 视频圆角 */
+    --video-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* 视频阴影 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    :root {
+        /* ...existing variables... */
+        --media-margin-top: 80px; /* 移动端减小顶部间距 */
+        --media-gap: 30px; /* 减小间距 */
+        --yuanpian-width: 300px; /* 减小SVG宽度 */
+        --video-width: 100%; /* 视频占满容器宽度 */
+    }
+    
+    .yuanpian-svg {
+        width: 80%;
+    }
+}
