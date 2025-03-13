@@ -311,7 +311,7 @@ body {
     --project-height: auto;
     --project-padding-x: 0;
     --project-padding-y: 50px;
-    --project-svg-width: 220px; /* 控制 xianmu.svg 的宽度 */
+    --project-svg-width: 180px; /* 控制 xianmu.svg 的宽度 */
     --project-svg-scale: 1; /* 控制 xianmu.svg 的缩放比例 */
     --project-left-offset: 0px; /* 控制相对于artwork-section左边缘的偏移量，正值向右偏移 */
     --project-offset: calc(-1 * var(--artwork-width) / 2 + 20px); /* 设置偏移量，使其与 artwork-section 左边缘对齐并略微内缩 */
@@ -586,13 +586,12 @@ body {
 }
 
 :root {
-    /* ...existing variables... */
     --completion-width: 1100px;
     --completion-margin-top: 200px;
     --completion-max-height: 800px;
     --completion-scale: 1;
-    --completion-border-radius: 12px; /* 修改默认值为12px */
-    --completion-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* 添加默认阴影 */
+    --completion-border-radius: 12px;
+    --completion-shadow: 0 8px 30px rgb(0 170 255 / 18%);
 }
 
 @media (max-width: 768px) {
@@ -622,7 +621,7 @@ body {
 /* 添加媒体组合区域样式 */
 .media-section {
     width: 100%;
-    margin: calc(var(--media-margin-top, 120px)) auto 60px;
+    margin: calc(var(--media-margin-top, 120px)) auto 150px;
     padding: 0 20px;
     display: flex;
     justify-content: center;
@@ -684,5 +683,89 @@ body {
     
     .yuanpian-svg {
         width: 80%;
+    }
+}
+
+/* 修改同人图标题SVG样式，放置在页面正确位置 */
+.tongreng-section {
+    width: calc(var(--project-svg-width) * var(--project-svg-scale)); /* 与project-section使用相同的宽度变量 */
+    position: relative; /* 改为相对定位，确保在文档流中 */
+    left: calc(50% + var(--project-offset)); /* 左对齐定位 */
+    transform: translateX(-510%); /* 向左移动自身宽度的100% */
+    top: auto; /* 不设置顶部位置 */
+    margin: calc(var(--tongreng-margin-top, 350px)) 0 40px; /* 增加顶部间距，确保在视频区域下方 */
+    z-index: 2;
+    margin: 0 auto; /* 与project-section一致，确保水平居中 */
+}
+
+/* 在移动端匹配project-section的行为 */
+@media (max-width: 768px) {
+    .tongreng-section {
+        left: 10px; /* 与project-section在移动端上一致 */
+        transform: none; /* 移除变换 */
+        bottom: calc(var(--tongreng-bottom-mobile, 50px)); /* 移动端调整底部位置 */
+    }
+}
+
+/* 添加变量控制 */
+:root {
+    /* ...existing variables... */
+    --tongreng-svg-width: 220px; /* 宽度与 xianmu.svg 保持一致 */
+    --tongreng-svg-scale: 1; /* 缩放比例 */
+    --tongreng-margin-top: 350px; /* 增加tongreng.svg的顶部边距 */
+    --tongreng-bottom: -260px; /* 距离底部的距离 */
+    --tongreng-bottom-mobile: 100px; /* 移动端距离底部的距离 */
+}
+
+/* 添加同人插画展示区域样式 */
+.fanart-gallery {
+    width: 100%;
+    margin: 100px auto 100px; /* 减少顶部间距，因为现在由tongreng-section控制 */
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.fanart-container {
+    width: 100%;
+    max-width: var(--fanart-container-width, 800px); /* 减小容器宽度适应垂直排列 */
+    display: flex; /* 改为flex布局 */
+    flex-direction: column; /* 垂直排列 */
+    gap: var(--fanart-gap, 40px); /* 增加图片之间的间距 */
+    align-items: center; /* 水平居中 */
+}
+
+.fanart-image {
+    width: 100%; /* 占满容器宽度 */
+    max-width: var(--fanart-image-max-width, 700px); /* 设置最大宽度 */
+    height: auto;
+    border-radius: var(--fanart-border-radius, 14px);
+    box-shadow: var(--fanart-shadow, 0 8px 30px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: block; /* 确保为块级元素 */
+    filter: none; /* 移除可能的滤镜效果 */
+    object-fit: contain; /* 确保图片比例保持一致 */
+}
+
+/* 鼠标悬停效果调整，确保不添加不必要的滤镜 */
+.fanart-image:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--fanart-hover-shadow, 0 12px 40px rgba(0, 0, 0, 0.2));
+    /* 不添加任何滤镜效果 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    :root {
+        /* ...existing variables... */
+        --fanart-top-margin: 180px; /* 移动端上方间距 */
+        --fanart-gap: 30px; /* 移动端更小的间距 */
+        --fanart-image-max-width: 90%; /* 移动端图片宽度 */
+    }
+    
+    .fanart-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 移动端更小的列宽 */
     }
 }

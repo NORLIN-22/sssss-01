@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/animations.css">
     <link rel="stylesheet" href="../../css/responsive.css">
     <link rel="stylesheet" href="../../css/page-illustration.css">
+    <link rel="stylesheet" href="../../css/illustration-fix.css">
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 </head>
 <body>
@@ -98,6 +99,51 @@
             </div>
         </div>
         
+        <!-- 添加同人图标题 SVG -->
+        <div class="project-section tongreng-section">
+            <object class="project-svg" data="../../assets/svg/illustration/tongreng.svg" type="image/svg+xml"></object>
+        </div>
+        
+        <!-- 修改同人插画图片展示区域 - 修正图片路径和格式 -->
+        <div class="fanart-gallery">
+            <div class="fanart-container">
+                <!-- 使用统一的图片格式 - 尝试使用jpg格式 -->
+                <img src="../../assets/png/illustration/tonrenchatu/1.jpg" alt="同人插画作品1" class="fanart-image">
+                <img src="../../assets/png/illustration/tonrenchatu/2.jpg" alt="同人插画作品2" class="fanart-image">
+                <img src="../../assets/png/illustration/tonrenchatu/4.jpg" alt="同人插画作品4" class="fanart-image">
+                <img src="../../assets/png/illustration/tonrenchatu/5.jpg" alt="同人插画作品5" class="fanart-image">
+                <img src="../../assets/png/illustration/tonrenchatu/6.jpg" alt="同人插画作品6" class="fanart-image">
+                <img src="../../assets/png/illustration/tonrenchatu/7.jpg" alt="同人插画作品7" class="fanart-image">
+                <img src="../../assets/png/illustration/tonrenchatu/8.jpg" alt="同人插画作品8" class="fanart-image">
+                <img src="../../assets/png/illustration/tonrenchatu/9.jpg" alt="同人插画作品9" class="fanart-image">
+                <img src="../../assets/png/illustration/tonrenchatu/10.jpg" alt="同人插画作品10" class="fanart-image">
+                <img src="../../assets/png/illustration/tonrenchatu/11.jpg" alt="同人插画作品11" class="fanart-image">
+                
+                <!-- 添加图片加载错误处理脚本 -->
+                <script>
+                    // 处理图片加载错误
+                    document.querySelectorAll('.fanart-image').forEach(img => {
+                        img.onerror = function() {
+                            console.log('尝试加载另一种格式: ' + this.src);
+                            
+                            // 如果jpg加载失败，尝试png格式
+                            if(this.src.endsWith('.jpg')) {
+                                this.src = this.src.replace('.jpg', '.png');
+                            } 
+                            // 如果png加载失败，尝试jpeg格式
+                            else if(this.src.endsWith('.png')) {
+                                this.src = this.src.replace('.png', '.jpeg');
+                            }
+                            // 如果还是失败，就隐藏这个图片
+                            else {
+                                this.style.display = 'none';
+                            }
+                        };
+                    });
+                </script>
+            </div>
+        </div>
+        
         <!-- 添加全屏查看器 -->
         <div class="fullscreen-viewer" id="imageViewer">
             <button class="close-viewer" id="closeViewer">&times;</button>
@@ -106,18 +152,32 @@
 
     </main>
 
-    <!-- 添加图片查看功能的脚本 -->
+    <!-- 更新脚本部分，支持同人图点击预览 -->
     <script>
         // 获取元素
         const completionImage = document.getElementById('completionImage');
         const imageViewer = document.getElementById('imageViewer');
         const closeViewer = document.getElementById('closeViewer');
+        const fullscreenImage = document.querySelector('.fullscreen-image');
         
-        // 点击图片打开查看器
+        // 点击完成图打开查看器
         completionImage.addEventListener('click', function() {
+            openViewer(this.src);
+        });
+        
+        // 点击同人图打开查看器
+        document.querySelectorAll('.fanart-image').forEach(image => {
+            image.addEventListener('click', function() {
+                openViewer(this.src);
+            });
+        });
+        
+        // 打开查看器函数
+        function openViewer(imageSrc) {
+            fullscreenImage.src = imageSrc;
             imageViewer.classList.add('active');
             document.body.style.overflow = 'hidden'; // 防止背景滚动
-        });
+        }
         
         // 点击关闭按钮关闭查看器
         closeViewer.addEventListener('click', function() {

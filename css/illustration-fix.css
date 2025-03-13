@@ -1,0 +1,29 @@
+
+/* 强制移除同人插画区域的任何滤镜效果 */
+.fanart-container {
+    background: white; /* 确保容器背景是纯白色 */
+    padding: 0; /* 移除任何可能影响渲染的内边距 */
+}
+
+.fanart-image {
+    filter: none !important; /* 强制移除任何滤镜效果 */
+    -webkit-filter: none !important; /* Safari支持 */
+    mix-blend-mode: normal !important; /* 确保正常混合模式 */
+    background-color: transparent; /* 确保背景透明 */
+    isolation: isolate; /* 创建新的堆叠上下文 */
+    position: relative; /* 创建新的定位上下文 */
+    z-index: 1; /* 确保在正确的层级 */
+}
+
+/* 移除任何可能的混合效果 */
+.fanart-gallery {
+    isolation: isolate;
+}
+
+/* 为特定图片添加单独的修复规则 */
+.fanart-image[src*="2.jpg"] {
+    filter: none !important;
+    -webkit-filter: none !important;
+    background-color: #ffffff !important;
+    isolation: isolate;
+}
