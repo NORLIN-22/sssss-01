@@ -1,0 +1,31 @@
+/* 本地字体定义文件 */
+
+@font-face {
+    font-family: 'Zen Dots';
+    src: url('../assets/fonts/ZenDots-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap; /* 提升字体加载性能 */
+}
+
+/* 保留Noto Sans TC字体 */
+@font-face {
+    font-family: 'HONOR Sans CN';
+    src: local('HONOR Sans CN'), local('HONOR Sans');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HONOR Sans CN';
+    src: local('HONOR Sans CN'), local('HONOR Sans');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HONOR Sans CN';
+    src: local('HONOR Sans CN'), local('HONOR Sans');
+    font-weight: 700;
+    font-style: normal;
+}

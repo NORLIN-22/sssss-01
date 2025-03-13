@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none;">
+  <!-- 导航图标 -->
+  <symbol id="nav-logo" viewBox="0 0 448.18 400.15">
+    <g id="prefix__图层_2" data-name="图层 2">
+      <g id="prefix__图层_1-2" data-name="图层 1">
+        <path class="prefix__cls-1" d="M31.68 0h53.81a31.09 31.09 0 0131.09 31.09v169q0 28.13 8.8 36.62t34 8.49h6.45v155h-31.08q-63.27 0-99-37.21T0 260.12V31.68A31.68 31.68 0 0131.68 0z"/>
+        <path class="prefix__cls-1" d="M165.8 400.15V146.47q0-66.21 39.84-106.34T312.26 0Q377.89 0 413 39t35.14 111.61v215.77a33.76 33.76 0 01-33.76 33.77h-47.03A35.17 35.17 0 01332.19 365V150.57q0-35.73-25.78-35.74-24 0-24 35.74v213.19A36.38 36.38 0 01246 400.15z"/>
+        <path class="prefix__cls-1" d="M236.73 0a70.93 70.93 0 00-70.93 70.93v329.22h81.13a34.87 34.87 0 0034.87-34.87V74l22.36-74z"/>
+      </g>
+    </g>
+  </symbol>
+  
+  <!-- 滚动指示器 -->
+  <symbol id="scroll-down" viewBox="0 0 24 24">
+    <path d="M12 4v16m-6-6l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/>
+  </symbol>
+  
+  <!-- 联系方式图标 -->
+  <symbol id="phone-icon" viewBox="0 0 24 24">
+    <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
+  </symbol>
+  
+  <symbol id="email-icon" viewBox="0 0 24 24">
+    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+  </symbol>
+  
+  <symbol id="wechat-icon" viewBox="0 0 24 24">
+    <path d="M9.5 4C5.36 4 2 6.69 2 10c0 1.89 1.08 3.56 2.78 4.66l-0.7 2.1 2.5-1.25C7.31 15.83 8.38 16 9.5 16c0.17 0 0.34-0.01 0.5-0.02C9.36 15.09 9 13.8 9 12.5c0-3.04 2.69-5.5 6-5.5 0.17 0 0.34 0.01 0.5 0.02C14.38 4.85 12.12 4 9.5 4zM6.5 8C5.67 8 5 7.33 5 6.5S5.67 5 6.5 5 8 5.67 8 6.5 7.33 8 6.5 8zm6 0c-0.83 0-1.5-0.67-1.5-1.5S11.67 5 12.5 5s1.5 0.67 1.5 1.5S13.33 8 12.5 8z" fill="currentColor"/>
+    <path d="M18.5 9c-3.31 0-6 2.46-6 5.5 0 3.04 2.69 5.5 6 5.5 0.71 0 1.38-0.12 2-0.34L23 21l-1.06-3.16C23.21 16.64 24 15.2 24 13.5c0-3.04-2.69-5.5-6-5.5zM15.5 13c-0.83 0-1.5-0.67-1.5-1.5s0.67-1.5 1.5-1.5 1.5 0.67 1.5 1.5-0.67 1.5-1.5 1.5zm6 0c-0.83 0-1.5-0.67-1.5-1.5s0.67-1.5 1.5-1.5 1.5 0.67 1.5 1.5-0.67 1.5-1.5 1.5z" fill="currentColor"/>
+  </symbol>
+  
+  <!-- 项目分类图标 -->
+  <symbol id="projects-title" viewBox="0 0 300 60">
+    <text x="10" y="40" font-family="Zen Dots" font-size="32" fill="currentColor">项目分类</text>
+  </symbol>
+  
+  <!-- 游戏图标 -->
+  <symbol id="game-category-anime" viewBox="0 0 48 48">
+    <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm-4 29v-18l14 9-14 9z" fill="currentColor"/>
+  </symbol>
+  
+  <symbol id="game-category-competitive" viewBox="0 0 48 48">
+    <path d="M38 6h-28c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4v-28c0-2.21-1.79-4-4-4zm-8 15h-4v4h4v4h-4v4h-4v-4h-4v-4h4v-4h-4v-4h4v-4h4v4h4v4z" fill="currentColor"/>
+  </symbol>
+  
+  <symbol id="game-category-sandbox" viewBox="0 0 48 48">
+    <path d="M6 6h36v36H6V6zm4 4v28h28V10H10zm8 4h4v4h-4v-4zm8 0h4v4h-4v-4zm-8 8h4v4h-4v-4zm8 0h4v4h-4v-4zm-8 8h4v4h-4v-4zm8 0h4v4h-4v-4z" fill="currentColor"/>
+  </symbol>
+  
+  <symbol id="game-category-survival" viewBox="0 0 48 48">
+    <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm-2 34h-4V26h4v12zm8 0h-4V26h4v12zm4-18H14v-4h20v4z" fill="currentColor"/>
+  </symbol>
+  
+  <symbol id="game-category-strategy" viewBox="0 0 48 48">
+    <path d="M40 4H8C5.79 4 4 5.79 4 8v32c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V8c0-2.21-1.79-4-4-4zM18 34h-4v-4h4v4zm0-8h-4v-4h4v4zm0-8h-4v-4h4v4zm8 16h-4v-4h4v4zm0-8h-4v-4h4v4zm0-8h-4v-4h4v4zm8 16h-4v-4h4v4zm0-8h-4v-4h4v4zm0-8h-4v-4h4v4z" fill="currentColor"/>
+  </symbol>
+  
+  <!-- 底部分隔线 -->
+  <symbol id="footer-divider" viewBox="0 0 1000 2">
+    <line x1="0" y1="1" x2="1000" y2="1" stroke="currentColor" stroke-width="2"/>
+  </symbol>
+  
+  <!-- Norlin Logo -->
+  <symbol id="norlin-logo" viewBox="0 0 200 60">
+    <text x="10" y="40" font-family="Zen Dots" font-size="32" fill="currentColor">NORLIN</text>
+  </symbol>
+</svg>

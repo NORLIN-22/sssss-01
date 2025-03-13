@@ -6,7 +6,10 @@
     <title>Norlin｜Personal blog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- 移除Google字体引用，使用本地字体 -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet"> -->
+    <!-- 添加本地字体样式 -->
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -82,7 +85,9 @@
 
             <!-- 修改滚动指示器,只保留一个 -->
             <div class="scroll-indicator">
-                <img src="assets/svg/home/scroll-down.svg" alt="scroll down" class="scroll-arrow">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="scroll-arrow">
+                    <path d="M16 22C15.7348 22 15.4804 21.8946 15.2929 21.7071L8.29289 14.7071C7.90237 14.3166 7.90237 13.6834 8.29289 13.2929C8.68342 12.9024 9.31658 12.9024 9.70711 13.2929L16 19.5858L22.2929 13.2929C22.6834 12.9024 23.3166 12.9024 23.7071 13.2929C24.0976 13.6834 24.0976 14.3166 23.7071 14.7071L16.7071 21.7071C16.5196 21.8946 16.2652 22 16 22Z" fill="white"/>
+                </svg>
             </div>
 
             <!-- 3D卡片效果区域 -->
@@ -253,7 +258,9 @@
 
 <!-- 滚动提示指示器 -->
 <div class="scroll-indicator">
-    <span class="scroll-arrow"></span>
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="scroll-arrow">
+        <path d="M16 22C15.7348 22 15.4804 21.8946 15.2929 21.7071L8.29289 14.7071C7.90237 14.3166 7.90237 13.6834 8.29289 13.2929C8.68342 12.9024 9.31658 12.9024 9.70711 13.2929L16 19.5858L22.2929 13.2929C22.6834 12.9024 23.3166 12.9024 23.7071 13.2929C24.0976 13.6834 24.0976 14.3166 23.7071 14.7071L16.7071 21.7071C16.5196 21.8946 16.2652 22 16 22Z" fill="white"/>
+    </svg>
 </div>
     
     <!-- 引入主要JavaScript文件 -->

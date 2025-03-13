@@ -402,7 +402,8 @@ body {
     transition: transform 0.3s ease;
 }
 
-.scroll-indicator img {
+/* 修改为匹配SVG元素 */
+.scroll-indicator .scroll-arrow {
     width: 100%;
     height: 100%;
     animation: floatUpDown 2s ease-in-out infinite; /* 应用浮动动画 */
@@ -418,10 +419,10 @@ body {
     }
 }
 
-/* 滚动指示器悬浮效果 */
-.scroll-indicator:hover img {
-    filter: invert(45%) sepia(92%) saturate(1864%) hue-rotate(202deg) brightness(98%) contrast(93%);
-    transition: filter 0.3s ease;
+/* 滚动指示器悬浮效果 - 修改为匹配SVG元素 */
+.scroll-indicator:hover .scroll-arrow path {
+    fill: #387ce8; /* 使用蓝色而非滤镜 */
+    transition: fill 0.3s ease;
 }
 
 /*---------------*\
@@ -540,6 +541,15 @@ body {
         var(--bg-color) 0%,
         rgba(249, 250, 252, 0.97) 100%
     ); /* 与内容区域相同的渐变 */
+}
+
+.category-title svg {
+    width: 250px;
+    height: auto;
+    margin-bottom: 80px;
+    display: block;
+    position: relative;
+    z-index: 2;
 }
 
 /* 项目分类容器 */
