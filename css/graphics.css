@@ -1,0 +1,169 @@
+/* 图形设计页面样式表 */
+
+/* 1. 布局变量 */
+:root {
+    --max-width: 1200px;
+    --grid-gap: 40px;
+    --section-spacing: 120px;
+    --content-padding: 40px;
+}
+
+/* 2. 页面容器 */
+.graphics-container {
+    max-width: 100%;        /* 移除宽度限制 */
+    margin: 0;              /* 移除水平边距 */
+    padding: 0;             /* 移除内边距 */
+}
+
+/* 3. 页面标题区域 */
+.page-header {
+    padding: 120px 0 60px;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+/* 4. 作品网格布局 */
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--grid-gap);
+    margin-bottom: var(--section-spacing);
+}
+
+/* 5. 作品卡片样式 */
+.work-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(56, 124, 232, 0.15);
+}
+
+.work-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.work-content {
+    padding: 20px;
+}
+
+.work-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+}
+
+.work-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* 6. 标签样式 */
+.work-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 4px 12px;
+    background: rgba(56, 124, 232, 0.1);
+    color: var(--accent-color);
+    border-radius: 16px;
+    font-size: 0.8rem;
+}
+
+/* 7. 加载动画 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 图片展示样式 */
+.image-gallery {
+    padding-top: 90px;      /* 只保留顶部间距，与导航栏高度对齐 */
+    width: 100%;
+    margin: 0;
+    padding-left: 180px;    /* 与导航栏logo对齐 */
+    padding-right: 180px;   /* 与导航栏portfolio对齐 */
+    box-sizing: border-box; /* 确保padding不会导致溢出 */
+}
+
+.gallery-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0;       /* 移除圆角 */
+}
+
+/* 预览图容器样式 */
+.preview-container {
+    width: 1920px;
+    height: 1080px;
+    max-width: 100%;
+    margin: 90px auto 0;  /* 保持第一个容器的顶部间距 */
+    display: block;
+    overflow: hidden;
+    position: relative;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.preview-container + .preview-container {
+    margin-top: 40px;  /* 添加预览图之间的间距 */
+}
+
+.preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.preview-container:hover .preview-image {
+    transform: scale(1.02);
+}
+
+/* 8. 响应式布局 */
+@media (max-width: 768px) {
+    :root {
+        --content-padding: 20px;
+        --grid-gap: 20px;
+    }
+
+    .works-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .page-header {
+        padding: 80px 0 40px;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+}

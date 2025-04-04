@@ -3,74 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>联系 - Norlin Design</title>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&family=Noto+Sans+TC:wght@300&display=swap" rel="stylesheet">
+    <title>平面设计｜Norlin portfolio</title>
+    <link rel="stylesheet" href="../../css/fonts.css">
     <link rel="stylesheet" href="../../css/main.css">
-    <link rel="stylesheet" href="../../css/animations.css">
-    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/graphics.css">
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-    <style>
-        /* 项目页面特定样式 */
-        body {
-            background-color: var(--bg-color);
-            min-height: 100vh;
-        }
-
-        .nav-menu {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 10px rgba(49, 139, 224, 0.336);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .nav-menu .nav-item {
-            color: var(--secondary-color) !important;
-        }
-
-        .nav-logo img {
-            filter: invert(45%) sepia(92%) saturate(1864%) hue-rotate(202deg) brightness(98%) contrast(93%);
-        }
-
-        /* 作品集链接悬浮效果 */
-        .portfolio-link.nav-item:hover {
-            background: transparent;
-            color: #387ce8 !important;
-            transform: none;
-        }
-
-        /* 内容区域样式 */
-        .content-container {
-            max-width: var(--content-width);
-            margin: 0 auto;
-            padding: calc(var(--nav-height) + 40px) 20px 60px;
-        }
-
-        /* 下拉菜单样式继承自主页白色区域样式 */
-        .dropdown-content {
-            background: rgba(255, 255, 255, 0.98);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-        }
-
-        .dropdown-item {
-            color: var(--secondary-color) !important;
-            font-weight: 300;
-        }
-
-        .dropdown-item:hover {
-            background: transparent;
-            color: #387ce8 !important;
-        }
-    </style>
 </head>
 <body>
     <!-- 导航菜单 -->
-    <nav class="nav-menu">
+    <nav class="nav-menu in-white-section">
         <a href="../../index.html" class="nav-logo">
             <img src="../../favicon.svg" alt="Norlin Logo">
         </a>
+        
         <div class="nav-links">
             <a href="../../index.html" class="nav-item">首页</a>
             <a href="../about.html" class="nav-item">简介</a>
@@ -78,12 +23,13 @@
                 <a class="nav-item">项目</a>
                 <div class="dropdown-content">
                     <a href="graphics.html" class="dropdown-item">平面设计</a>
-                    <a href="illustration.html" class="dropdown-item">插画绘画</a>
+                    <a href="illustration.html" class="dropdown-item">插画绘画</a> 
                     <a href="frontend.html" class="dropdown-item">前端相关</a>
                 </div>
             </div>
             <a href="../contact.html" class="nav-item">联系</a>
         </div>
+        
         <a href="https://portfolio-843.pages.dev/#intro" 
            class="portfolio-link nav-item" 
            target="_blank" 
@@ -93,9 +39,38 @@
         </a>
     </nav>
 
-    <!-- 主要内容区域 -->
-    <main class="content-container">
-        <!-- 这里放置具体项目内容 -->
-    </main>
+    <div class="graphics-container">
+        <!-- 银河系列预览图 -->
+        <a href="graphics-yinhe.html" class="preview-container">
+            <img src="../../assets/png/graphics/yinhe/1.png" alt="银河系列预览" class="preview-image">
+        </a>
+        
+        <!-- 安其系列预览图 -->
+        <a href="graphics-anqi.html" class="preview-container">
+            <img src="../../assets/png/graphics/anqi/25.png" alt="安其系列预览" class="preview-image">
+        </a>
+
+        <!-- 艾轩系列预览图 -->
+        <a href="graphics-aixuan.html" class="preview-container">
+            <img src="../../assets/png/graphics/aixuan/37.png" alt="艾轩系列预览" class="preview-image">
+        </a>
+    </div>
+
+    <script>
+        // 添加滚动动画
+        const cards = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        cards.forEach(card => observer.observe(card));
+    </script>
 </body>
 </html>
