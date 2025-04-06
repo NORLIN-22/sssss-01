@@ -1095,7 +1095,7 @@ body {
 
 /* 版权信息 */
 .footer-copyright {
-    width: 120px;  /* 调整版权信息宽度 */
+    width: 320px;  /* 调整版权信息宽度 */
     margin: -30px 0 0;  /* 调整上边距 */
 }
 
