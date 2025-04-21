@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二次元系列(右)｜Norlin portfolio</title>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/graphics.css">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+</head>
+<body>
+    <!-- 导航菜单 -->
+    <nav class="nav-menu in-white-section">
+        <a href="../../index.html" class="nav-logo">
+            <img src="../../favicon.svg" alt="Norlin Logo">
+        </a>
+        
+        <div class="nav-links">
+            <a href="../../index.html" class="nav-item">首页</a>
+            <a href="../about.html" class="nav-item">简介</a>
+            <div class="nav-dropdown">
+                <a class="nav-item">项目</a>
+                <div class="dropdown-content">
+                    <a href="graphics.html" class="dropdown-item">平面设计</a>
+                    <a href="illustration.html" class="dropdown-item">插画绘画</a> 
+                    <a href="frontend.html" class="dropdown-item">前端相关</a>
+                </div>
+            </div>
+            <a href="../contact.html" class="nav-item">联系</a>
+        </div>
+        
+        <a href="https://portfolio-843.pages.dev/#intro" 
+           class="portfolio-link nav-item" 
+           target="_blank" 
+           rel="noopener"
+           title="建议打开VPN">
+            旧版作品集
+        </a>
+    </nav>
+
+    <!-- 图片展示区 -->
+    <div class="graphics-container">
+        <!-- 竖版海报区域 -->
+        <div class="poster-layout">
+            <img src="../../assets/png/graphics/erciyuan/game-banner/1.png" alt="游戏横幅1" class="gallery-image">
+            <img src="../../assets/png/graphics/erciyuan/game-banner/2.png" alt="游戏横幅2" class="gallery-image">
+        </div>
+        
+        <div class="image-gallery">
+            <img src="../../assets/png/graphics/erciyuan/game-banner/3.png" alt="游戏横幅3" class="gallery-image">
+            <img src="../../assets/png/graphics/erciyuan/game-banner/4.png" alt="游戏横幅4" class="gallery-image">
+            <img src="../../assets/png/graphics/erciyuan/game-banner/5.png" alt="游戏横幅5" class="gallery-image">
+        </div>
+    </div>
+    
+    <!-- 返回按钮 -->
+    <a href="graphics.html" class="back-to-works">
+        <svg viewBox="0 0 24 24">
+            <path d="M19 11H7.14l3.63-4.36a1 1 0 1 0-1.54-1.28l-5 6a1.19 1.19 0 0 0-.09.15c0 .05 0 .08-.07.13A1 1 0 0 0 4 12a1 1 0 0 0 .07.36c0 .05 0 .08.07.13a1.19 1.19 0 0 0 .09.15l5 6A1 1 0 0 0 10 19a1 1 0 0 0 .64-.23 a1 1 0 0 0 .13-1.41L7.14 13H19a1 1 0 0 0 0-2z"/>
+        </svg>
+    </a>
+
+    <!-- 全屏查看图片的遮罩层 -->
+    <div class="fullscreen-overlay">
+        <img class="fullscreen-image" src="" alt="">
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.gallery-image');
+        const overlay = document.querySelector('.fullscreen-overlay');
+        const fullscreenImage = document.querySelector('.fullscreen-image');
+
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                fullscreenImage.src = img.src;
+                overlay.classList.add('active');
+            });
+        });
+
+        overlay.addEventListener('click', () => {
+            overlay.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

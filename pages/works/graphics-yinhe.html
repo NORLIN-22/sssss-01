@@ -68,5 +68,37 @@
             <img src="../../assets/png/graphics/yinhe/24.png" alt="银河系列24" class="gallery-image">
         </div>
     </div>
+    
+    <!-- 返回按钮 -->
+    <a href="graphics.html" class="back-to-works">
+        <svg viewBox="0 0 24 24">
+            <path d="M19 11H7.14l3.63-4.36a1 1 0 1 0-1.54-1.28l-5 6a1.19 1.19 0 0 0-.09.15c0 .05 0 .08-.07.13A1 1 0 0 0 4 12a1 1 0 0 0 .07.36c0 .05 0 .08.07.13a1.19 1.19 0 0 0 .09.15l5 6A1 1 0 0 0 10 19a1 1 0 0 0 .64-.23 1 1 0 0 0 .13-1.41L7.14 13H19a1 1 0 0 0 0-2z"/>
+        </svg>
+    </a>
+
+    <!-- 全屏查看图片的遮罩层 -->
+    <div class="fullscreen-overlay">
+        <img class="fullscreen-image" src="" alt="">
+    </div>
+
+    <script>
+        // 获取所有图片和遮罩层
+        const images = document.querySelectorAll('.gallery-image');
+        const overlay = document.querySelector('.fullscreen-overlay');
+        const fullscreenImage = document.querySelector('.fullscreen-image');
+
+        // 为每张图片添加点击事件
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                fullscreenImage.src = img.src;
+                overlay.classList.add('active');
+            });
+        });
+
+        // 点击遮罩层关闭图片
+        overlay.addEventListener('click', () => {
+            overlay.classList.remove('active');
+        });
+    </script>
 </body>
 </html>
